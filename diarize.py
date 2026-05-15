@@ -98,8 +98,9 @@ if not HF_TOKEN:
     print("  Or set it in your shell: export HF_TOKEN=hf_your_token_here")
     sys.exit(1)
 PROJECT_DIR = VIDEO_PATH.parent
-AUDIO_PATH = PROJECT_DIR / f"{VIDEO_PATH.stem}_audio_mono.wav"
-SEGMENTS_PATH = PROJECT_DIR / f"{VIDEO_PATH.stem}_segments.json"
+OUTPUT_DIR = PROJECT_DIR / "output"
+AUDIO_PATH = OUTPUT_DIR / f"{VIDEO_PATH.stem}_audio_mono.wav"
+SEGMENTS_PATH = OUTPUT_DIR / f"{VIDEO_PATH.stem}_segments.json"
 
 LANGUAGE_NAMES = {
     "en": "English", "es": "Spanish", "fr": "French", "de": "German",
@@ -661,6 +662,8 @@ def main():
 
     print(f"Duration: ~{int(duration) // 60}m {int(duration) % 60}s\n")
 
+    OUTPUT_DIR.mkdir(exist_ok=True)
+
     if not AUDIO_PATH.exists():
         extract_audio()
     else:
@@ -704,7 +707,8 @@ def main():
     print(f"\nKeeping {', '.join(sorted(keep_speakers))}, removing {', '.join(sorted(remove_speakers))}...")
 
     label = "+".join(sorted(remove_speakers))
-    output_path = PROJECT_DIR / f"{VIDEO_PATH.stem} — {label} removed.fcpxml"
+    OUTPUT_DIR.mkdir(exist_ok=True)
+    output_path = OUTPUT_DIR / f"{VIDEO_PATH.stem} — {label} removed.fcpxml"
 
     if parsed_fcpxml:
         keep, total_dur = generate_fcpxml_from_source(
