@@ -13,6 +13,10 @@ Options:
   --fcpxml <path>         Original FCP project FCPXML. When provided, the output FCPXML
                           references the original source clips instead of the proxy video.
                           Export from FCP via File → Export XML before running.
+  --event <name>          Name of the FCP event to place the project in on import.
+                          If it matches an existing event in your library, FCP will add
+                          the project there instead of creating a new event.
+                          Defaults to "Speaker Cut".
 """
 
 import sys
@@ -90,6 +94,15 @@ if "--fcpxml" in args:
         print("Error: --fcpxml requires a file path argument")
         sys.exit(1)
 
+EVENT_NAME = None
+if "--event" in args:
+    idx = args.index("--event")
+    try:
+        EVENT_NAME = args[idx + 1]
+    except IndexError:
+        print("Error: --event requires a name argument")
+        sys.exit(1)
+
 HF_TOKEN = os.environ.get("HF_TOKEN", "")
 if not HF_TOKEN:
     print("Error: HF_TOKEN is not set.")
@@ -129,6 +142,7 @@ def parse_fcpxml_project(fcpxml_path):
       seq_duration  — float total sequence duration in seconds
       formats       — dict  {format_id: {fps_num, fps_den, ..., elem}}
       seq_fmt_id    — str   the format id referenced by the sequence
+      library_info  — dict  {location, event_name, event_uid} from the source project
     """
     import xml.etree.ElementTree as ET
 
@@ -137,6 +151,16 @@ def parse_fcpxml_project(fcpxml_path):
 
     def strip_ns(tag):
         return tag.split("}")[-1] if "}" in tag else tag
+
+    # --- library + event identity ---
+    library_info = {"location": None, "event_name": None, "event_uid": None}
+    for elem in root.iter():
+        if strip_ns(elem.tag) == "library":
+            library_info["location"] = elem.get("location")
+        if strip_ns(elem.tag) == "event":
+            library_info["event_name"] = elem.get("name")
+            library_info["event_uid"] = elem.get("uid")
+            break
 
     # --- formats ---
     formats = {}
@@ -237,7 +261,7 @@ def parse_fcpxml_project(fcpxml_path):
         })
 
     timeline_clips.sort(key=lambda c: c["timeline_start"])
-    return assets, fmt_info, timeline_clips, seq_duration, formats, seq_fmt_id
+    return assets, fmt_info, timeline_clips, seq_duration, formats, seq_fmt_id, library_info
 
 
 def get_video_info():
@@ -286,31 +310,53 @@ def run_diarization():
     for turn, _, speaker in diarization.itertracks(yield_label=True):
         segments.append({"start": round(turn.start, 3), "end": round(turn.end, 3), "speaker": speaker})
 
-    data = {"speakers": {}, "segments": segments}
-    with open(SEGMENTS_PATH, "w") as f:
-        json.dump(data, f, indent=2)
+    # Use save_segments so that the FCPXML path (from the CLI flag) is persisted
+    # even on the initial diarization write.
+    save_segments(segments, {}, fcpxml_path=FCPXML_PATH)
     print(f"  Saved {len(segments)} segments → {SEGMENTS_PATH.name}")
     return segments, {}
 
 
-def save_segments(segments, speaker_info):
-    """Write segments + per-speaker language metadata to the JSON cache."""
-    data = {"speakers": speaker_info, "segments": segments}
+def save_segments(segments, speaker_info, fcpxml_path=None):
+    """Write segments + per-speaker language metadata + FCPXML path to the JSON cache.
+
+    The fcpxml_path argument controls what gets stored:
+      - A Path/str value  → store that absolute path (CLI flag or newly resolved path).
+      - None              → preserve whatever path is already in the cache, if any.
+    This ensures that re-runs which don't supply --fcpxml never silently erase a
+    previously cached path.
+    """
+    # Preserve an existing cached path when the caller has nothing new to write.
+    stored_path = str(fcpxml_path) if fcpxml_path else None
+    if stored_path is None and SEGMENTS_PATH.exists():
+        try:
+            with open(SEGMENTS_PATH) as _f:
+                _existing = json.load(_f)
+            stored_path = _existing.get("fcpxml_path")
+        except Exception:
+            pass
+
+    data = {
+        "speakers": speaker_info,
+        "segments": segments,
+        "fcpxml_path": stored_path,
+    }
     with open(SEGMENTS_PATH, "w") as f:
         json.dump(data, f, indent=2)
 
 
 def load_cached_segments():
-    if SEGMENTS_PATH.exists():
-        answer = input(f"\nFound cached diarization ({SEGMENTS_PATH.name}). Use it? [Y/n]: ").strip().lower()
-        if answer in ("", "y", "yes"):
-            with open(SEGMENTS_PATH) as f:
-                data = json.load(f)
-            if isinstance(data, list):
-                # Old format — plain list of segments, no language info
-                return data, {}
-            return data.get("segments", []), data.get("speakers", {})
-    return None, None
+    if not SEGMENTS_PATH.exists():
+        return None, None, None
+    answer = input(f"\nFound cached diarization ({SEGMENTS_PATH.name}). Use it? [Y/n]: ").strip().lower()
+    if answer not in ("", "y", "yes"):
+        return None, None, None
+    with open(SEGMENTS_PATH) as f:
+        data = json.load(f)
+    if isinstance(data, list):
+        return data, {}, None
+    cached_fcpxml = data.get("fcpxml_path")
+    return data.get("segments", []), data.get("speakers", {}), cached_fcpxml
 
 
 def transcribe_speaker_samples(segments):
@@ -492,19 +538,17 @@ def generate_fcpxml(segments, remove_speakers, video_info, output_path, original
             <media-rep kind="original-media" src="{src_url}"/>
         </asset>
     </resources>
-    <library>
-        <event name="Speaker Cut">
-            <project name="{video_name} — {label} removed">
-                <sequence format="r1"
-                    tcStart="0s" tcFormat="NDF"
-                    audioLayout="stereo" audioRate="48k"
-                    duration="{secs(total_dur, fps_num, fps_den)}">
-                    <spine>{clips}
-                    </spine>
-                </sequence>
-            </project>
-        </event>
-    </library>
+    <event name="{EVENT_NAME or 'Speaker Cut'}">
+        <project name="{video_name} — {label} removed">
+            <sequence format="r1"
+                tcStart="0s" tcFormat="NDF"
+                audioLayout="stereo" audioRate="48k"
+                duration="{secs(total_dur, fps_num, fps_den)}">
+                <spine>{clips}
+                </spine>
+            </sequence>
+        </project>
+    </event>
 </fcpxml>'''
 
     with open(output_path, "w", encoding="utf-8") as f:
@@ -526,7 +570,7 @@ def generate_fcpxml_from_source(segments, remove_speakers, parsed_fcpxml, output
     """
     import xml.etree.ElementTree as ET
 
-    assets, fmt_info, timeline_clips, seq_duration, formats, seq_fmt_id = parsed_fcpxml
+    assets, fmt_info, timeline_clips, seq_duration, formats, seq_fmt_id, library_info = parsed_fcpxml
     fps_num = fmt_info["fps_num"]
     fps_den = fmt_info["fps_den"]
     # Use the native timebase (fps_num) so timecodes match the source exactly
@@ -615,13 +659,22 @@ def generate_fcpxml_from_source(segments, remove_speakers, parsed_fcpxml, output
     label = "+".join(sorted(remove_speakers))
     project_name = f"{VIDEO_PATH.stem} — {label} removed"
 
+    # Event: --event flag overrides, otherwise use the source project's event
+    event_name = EVENT_NAME or library_info["event_name"] or "Speaker Cut"
+    event_uid  = library_info["event_uid"] or ""
+    event_uid_attr = f' uid="{event_uid}"' if event_uid else ""
+
+    # Wrap in the original library so FCP opens it and adds to the matching event
+    lib_location = library_info["location"] or ""
+    lib_location_attr = f' location="{lib_location}"' if lib_location else ""
+
     xml = f'''<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE fcpxml>
 <fcpxml version="1.10">
     <resources>
 {res}    </resources>
-    <library>
-        <event name="Speaker Cut">
+    <library{lib_location_attr}>
+        <event name="{event_name}"{event_uid_attr}>
             <project name="{project_name}">
                 <sequence format="{seq_fmt_id}"
                     tcStart="0s" tcFormat="NDF"
@@ -646,21 +699,8 @@ def main():
     print(f"Video: {VIDEO_PATH.name}")
     if NUM_SPEAKERS:
         print(f"Speaker hint: {NUM_SPEAKERS}")
-
-    # Parse original FCPXML if provided — its sequence duration is authoritative
-    parsed_fcpxml = None
-    if FCPXML_PATH:
-        print(f"Original FCPXML: {FCPXML_PATH.name}")
-        print("  Parsing edit decisions...")
-        parsed_fcpxml = parse_fcpxml_project(FCPXML_PATH)
-        _, _, tl_clips, seq_duration, _, _ = parsed_fcpxml
-        duration = seq_duration
-        print(f"  {len(tl_clips)} source clip(s) on timeline")
-    else:
-        video_info = get_video_info()
-        duration = float(video_info["format"]["duration"])
-
-    print(f"Duration: ~{int(duration) // 60}m {int(duration) % 60}s\n")
+    if EVENT_NAME:
+        print(f"Target event: {EVENT_NAME}")
 
     OUTPUT_DIR.mkdir(exist_ok=True)
 
@@ -669,9 +709,46 @@ def main():
     else:
         print(f"Audio already extracted ({AUDIO_PATH.name}), skipping.")
 
-    segments, cached_speakers = load_cached_segments()
+    segments, cached_speakers, cached_fcpxml_path = load_cached_segments()
     if segments is None:
         segments, cached_speakers = run_diarization()
+        # run_diarization already called save_segments with FCPXML_PATH; mirror it here
+        # so the rest of main() can use cached_fcpxml_path normally.
+        cached_fcpxml_path = str(FCPXML_PATH) if FCPXML_PATH else None
+
+    # Resolve FCPXML path: CLI flag > cached path from previous run
+    resolved_fcpxml_path = FCPXML_PATH
+    if resolved_fcpxml_path is None and cached_fcpxml_path:
+        resolved_fcpxml_path = Path(cached_fcpxml_path)
+        if resolved_fcpxml_path.exists():
+            print(f"Using cached FCPXML: {resolved_fcpxml_path.name}")
+        else:
+            print(
+                f"Warning: cached FCPXML not found at:\n"
+                f"  {resolved_fcpxml_path}\n"
+                f"The drive may be unplugged or the file moved. Re-specify it with:\n"
+                f"  python3 diarize.py \"{VIDEO_PATH}\" --fcpxml <path/to/project.fcpxmld>\n"
+                f"Falling back to proxy-only mode."
+            )
+            resolved_fcpxml_path = None
+
+    # Parse FCPXML — its sequence duration is authoritative
+    parsed_fcpxml = None
+    if resolved_fcpxml_path:
+        print(f"Original FCPXML: {resolved_fcpxml_path.name}")
+        print("  Parsing edit decisions...")
+        parsed_fcpxml = parse_fcpxml_project(resolved_fcpxml_path)
+        _, _, tl_clips, seq_duration, _, _, lib_info = parsed_fcpxml
+        duration = seq_duration
+        print(f"  {len(tl_clips)} source clip(s) on timeline")
+        resolved_event = EVENT_NAME or lib_info["event_name"] or "Speaker Cut"
+        lib_name = Path(unquote(lib_info["location"].replace("file://", ""))).name if lib_info["location"] else "unknown"
+        print(f"  Target event: \"{resolved_event}\" in library \"{lib_name}\"")
+    else:
+        video_info = get_video_info()
+        duration = float(video_info["format"]["duration"])
+
+    print(f"Duration: ~{int(duration) // 60}m {int(duration) % 60}s\n")
 
     transcripts = transcribe_speaker_samples(segments)
 
@@ -680,7 +757,7 @@ def main():
         sp: {"language": t["language"], "lang_code": t.get("lang_code", "?")}
         for sp, t in transcripts.items()
     }
-    save_segments(segments, speaker_info)
+    save_segments(segments, speaker_info, fcpxml_path=resolved_fcpxml_path)
 
     speakers = show_speaker_summary(segments, duration, transcripts)
     # Sort by duration descending — same order shown in the summary above
@@ -715,6 +792,8 @@ def main():
             segments, remove_speakers, parsed_fcpxml, output_path
         )
     else:
+        if "video_info" not in dir():
+            video_info = get_video_info()
         keep, total_dur = generate_fcpxml(
             segments, remove_speakers, video_info, output_path, original_path=ORIGINAL_PATH
         )
