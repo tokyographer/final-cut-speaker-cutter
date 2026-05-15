@@ -23,6 +23,22 @@ import tempfile
 from pathlib import Path
 from urllib.parse import quote, unquote
 
+
+def _load_env():
+    """Load .env from the script's directory into os.environ (no third-party deps)."""
+    env_path = Path(__file__).parent / ".env"
+    if not env_path.exists():
+        return
+    with open(env_path) as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, _, value = line.partition("=")
+            os.environ.setdefault(key.strip(), value.strip())
+
+_load_env()
+
 # --- Parse args ---
 args = sys.argv[1:]
 if not args or args[0].startswith("--"):
@@ -74,10 +90,12 @@ if "--fcpxml" in args:
         print("Error: --fcpxml requires a file path argument")
         sys.exit(1)
 
-HF_TOKEN = os.environ.get("HF_TOKEN")
+HF_TOKEN = os.environ.get("HF_TOKEN", "")
 if not HF_TOKEN:
-    print("Error: HF_TOKEN environment variable is not set.")
-    print("  export HF_TOKEN=hf_your_token_here")
+    print("Error: HF_TOKEN is not set.")
+    print("  Add it to a .env file in this directory:")
+    print("    echo 'HF_TOKEN=hf_your_token_here' > .env")
+    print("  Or set it in your shell: export HF_TOKEN=hf_your_token_here")
     sys.exit(1)
 PROJECT_DIR = VIDEO_PATH.parent
 AUDIO_PATH = PROJECT_DIR / f"{VIDEO_PATH.stem}_audio_mono.wav"
