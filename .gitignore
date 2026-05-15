@@ -1,0 +1,32 @@
+# Media and project files (keep in fcp-media/, never commit)
+fcp-media/
+
+# Video files
+*.mov
+*.mp4
+*.m4v
+*.mxf
+*.avi
+*.mkv
+
+# Generated audio cache
+*_audio_mono.wav
+
+# Diarization cache
+*_segments.json
+
+# FCPXML output files
+*.fcpxml
+*.fcpxmld
+*.xml
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+
+# macOS
+.DS_Store
