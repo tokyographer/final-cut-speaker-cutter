@@ -328,7 +328,7 @@ def run_diarization():
     return segments
 
 
-def transcribe_speaker_samples(segments):
+def transcribe_speaker_samples(segments, exclude=None):
     """Transcribe a short sample from each speaker using Whisper."""
     print("\nTranscribing speaker samples for identification...")
     if WHISPER_BACKEND == "mlx":
@@ -342,6 +342,8 @@ def transcribe_speaker_samples(segments):
     speaker_segs = {}
     for seg in segments:
         sp = seg["speaker"]
+        if exclude and sp in exclude:
+            continue
         dur = seg["end"] - seg["start"]
         if dur < 2.0:
             continue
@@ -515,7 +517,7 @@ def secs(t, fps_num, fps_den, tb=90000):
     return f"{numerator}/{tb}s"
 
 
-def generate_fcpxml(segments, remove_speakers, video_info, output_path, original_path=None):
+def generate_fcpxml(segments, remove_speakers, video_info, output_path, original_path=None, project_name=None):
     vs = next(s for s in video_info["streams"] if s["codec_type"] == "video")
     fps_num, fps_den = (int(x) for x in vs["r_frame_rate"].split("/"))
     width, height = vs["width"], vs["height"]
@@ -548,6 +550,8 @@ def generate_fcpxml(segments, remove_speakers, video_info, output_path, original
     video_name = ref_path.stem
     src_url = "file://" + quote(str(ref_path.resolve()), safe="/:")
     label = "+".join(sorted(remove_speakers))
+    if project_name is None:
+        project_name = f"{video_name} — {label} removed"
 
     clips = ""
     offset = 0.0
@@ -579,7 +583,7 @@ def generate_fcpxml(segments, remove_speakers, video_info, output_path, original
         </asset>
     </resources>
     <event name="{EVENT_NAME or 'Speaker Cut'}">
-        <project name="{video_name} — {label} removed">
+        <project name="{project_name}">
             <sequence format="r1"
                 tcStart="0s" tcFormat="NDF"
                 audioLayout="stereo" audioRate="48k"
@@ -597,7 +601,7 @@ def generate_fcpxml(segments, remove_speakers, video_info, output_path, original
     return snapped_keep, total_dur
 
 
-def generate_fcpxml_from_source(segments, remove_speakers, parsed_fcpxml, output_path):
+def generate_fcpxml_from_source(segments, remove_speakers, parsed_fcpxml, output_path, project_name=None):
     """
     Generate FCPXML referencing the original source clips from the FCP project.
 
@@ -697,7 +701,8 @@ def generate_fcpxml_from_source(segments, remove_speakers, parsed_fcpxml, output
         offset = snap_to_frame(offset + sc["duration"], fps_num, fps_den)
 
     label = "+".join(sorted(remove_speakers))
-    project_name = f"{VIDEO_PATH.stem} — {label} removed"
+    if project_name is None:
+        project_name = f"{VIDEO_PATH.stem} — {label} removed"
 
     # Event: --event flag overrides, otherwise use the source project's event
     event_name = EVENT_NAME or library_info["event_name"] or "Speaker Cut"
@@ -770,11 +775,22 @@ def main():
 
     print(f"Duration: ~{int(duration) // 60}m {int(duration) % 60}s\n")
 
-    transcripts = transcribe_speaker_samples(segments)
+    # Pre-compute durations to skip transcribing short speakers
+    sp_durations = {}
+    for seg in segments:
+        sp_durations[seg["speaker"]] = sp_durations.get(seg["speaker"], 0) + seg["end"] - seg["start"]
+    short_speakers = {sp for sp, dur in sp_durations.items() if dur < 60}
+    if short_speakers:
+        print(f"  Skipping {len(short_speakers)} speaker(s) with <1 min of speech.")
+
+    transcripts = transcribe_speaker_samples(segments, exclude=short_speakers)
 
     speakers = show_speaker_summary(segments, duration, transcripts)
-    # Sort by duration descending — same order shown in the summary above
-    speaker_list = sorted(speakers.keys(), key=lambda sp: -speakers[sp])
+    # Sort by duration descending, excluding short speakers
+    speaker_list = sorted(
+        (sp for sp in speakers if sp not in short_speakers),
+        key=lambda sp: -speakers[sp]
+    )
 
     print("\nWhich speaker(s) do you want to KEEP?")
     print("  Enter one number, or multiple comma-separated (e.g. 0,2)")
@@ -793,22 +809,28 @@ def main():
         print("  Invalid choice, try again.")
 
     keep_speakers = {speaker_list[c] for c in choices}
-    remove_speakers = set(speaker_list) - keep_speakers
+    remove_speakers = (set(speaker_list) - keep_speakers) | short_speakers
     print(f"\nKeeping {', '.join(sorted(keep_speakers))}, removing {', '.join(sorted(remove_speakers))}...")
 
-    label = "+".join(sorted(remove_speakers))
     OUTPUT_DIR.mkdir(exist_ok=True)
-    output_path = OUTPUT_DIR / f"{VIDEO_PATH.stem} — {label} removed.fcpxml"
+    remove_label = "+".join(sorted(remove_speakers))
+    keep_label   = "+".join(sorted(keep_speakers))
+    candidate    = OUTPUT_DIR / f"{VIDEO_PATH.stem} — {remove_label} removed.fcpxml"
+    if len(candidate.name) > 240:
+        candidate = OUTPUT_DIR / f"{VIDEO_PATH.stem} — {keep_label} kept.fcpxml"
+    output_path = candidate
 
+    project_name = output_path.stem
     if parsed_fcpxml:
         keep, total_dur = generate_fcpxml_from_source(
-            segments, remove_speakers, parsed_fcpxml, output_path
+            segments, remove_speakers, parsed_fcpxml, output_path, project_name=project_name
         )
     else:
         if "video_info" not in dir():
             video_info = get_video_info()
         keep, total_dur = generate_fcpxml(
-            segments, remove_speakers, video_info, output_path, original_path=ORIGINAL_PATH
+            segments, remove_speakers, video_info, output_path,
+            original_path=ORIGINAL_PATH, project_name=project_name
         )
 
     transcript_text = transcribe_full(keep_speakers, segments)
