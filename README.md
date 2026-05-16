@@ -2,17 +2,18 @@
 
 Automatically cut a specific speaker out of a video using AI-based speaker diarization, and export the result as a Final Cut Pro-ready FCPXML file.
 
-The script identifies who is speaking at every moment, shows you a labeled summary with language detection and sample transcripts, and lets you choose which speaker to keep. It outputs an `.fcpxml` that imports directly into the correct event in your existing FCP library, referencing your original high-resolution source clips.
+The script identifies who is speaking at every moment, shows you a labeled summary with language detection and sample transcripts, and lets you choose which speaker to keep. It outputs an `.fcpxml` that imports directly into the correct event in your existing FCP library, referencing your original high-resolution source clips — plus a `.txt` file with the full transcript of the kept speaker.
 
 ---
 
 ## How it works
 
 1. **Audio extraction** — FFmpeg extracts a mono 16 kHz WAV from your video.
-2. **Speaker diarization** — [pyannote.audio](https://github.com/pyannote/pyannote-audio) segments the audio by speaker and labels each segment `SPEAKER_00`, `SPEAKER_01`, etc. Results are cached to a JSON file so re-runs are instant.
-3. **Language detection + transcription** — [OpenAI Whisper](https://github.com/openai/whisper) transcribes a short sample from each speaker and detects the language.
+2. **Speaker diarization** — [pyannote.audio](https://github.com/pyannote/pyannote-audio) segments the audio by speaker and labels each segment `SPEAKER_00`, `SPEAKER_01`, etc. Speakers with less than 1 minute of total speech are automatically discarded.
+3. **Language detection + transcription** — Whisper transcribes a short sample from each remaining speaker and detects the language. Supports [OpenAI Whisper](https://github.com/openai/whisper) (default) or [mlx-whisper](https://github.com/ml-explore/mlx-examples/tree/main/whisper) for faster transcription on Apple Silicon via the ANE.
 4. **Speaker selection** — A summary is displayed (sorted by speaking time) with language and a sample quote. You enter the number of the speaker to keep.
 5. **FCPXML generation** — The script builds a new timeline containing only the kept speaker's segments. When a source FCP project XML is provided, the output references the original source clips and imports into the correct event in your existing library.
+6. **Transcript export** — A full Whisper transcription of the kept speaker's audio is written to a `.txt` file alongside the FCPXML.
 
 ---
 
@@ -26,11 +27,17 @@ The script identifies who is speaking at every moment, shows you a labeled summa
 
 ### Python dependencies
 
-```
+```bash
 pip install pyannote.audio openai-whisper torch
 ```
 
-On Apple Silicon, MPS (GPU acceleration) is used automatically if available.
+For faster transcription on Apple Silicon (optional):
+
+```bash
+pip install mlx-whisper
+```
+
+On Apple Silicon, MPS (GPU acceleration) is used automatically for diarization. With `--whisper mlx`, transcription runs on the ANE.
 
 ---
 
@@ -59,31 +66,23 @@ brew install ffmpeg   # macOS
 
 ### Basic — proxy video only
 
-Run diarization on a video and generate an FCPXML referencing that same file:
-
 ```bash
 python3 diarize.py "fcp-media/MyVideo.mov"
 ```
 
-The output `.fcpxml` will be written to `fcp-media/output/`.
-
-### With speaker count hint
-
-If you know how many speakers are in the video, pass it to improve diarization accuracy:
-
-```bash
-python3 diarize.py "fcp-media/MyVideo.mov" --speakers 2
-```
-
 ### With original FCP project — recommended
 
-For the best result, export your FCP project XML and pass it with `--fcpxml`. The output will reference your original full-resolution source clips and import directly into the correct event in your library:
+Export your FCP project XML and pass it with `--fcpxml`. The output will reference your original full-resolution source clips and import directly into the correct event in your library:
 
 ```bash
 python3 diarize.py "fcp-media/MyProxy.mov" --fcpxml "fcp-media/MyProject.fcpxmld"
 ```
 
-The `--fcpxml` path is cached after the first run. Re-running to keep a different speaker does not require passing it again.
+### With mlx-whisper (Apple Silicon)
+
+```bash
+python3 diarize.py "fcp-media/MyProxy.mov" --fcpxml "fcp-media/MyProject.fcpxmld" --whisper mlx
+```
 
 **Import into FCP:**
 `File → Import → XML…` and select the generated `.fcpxml`. The project will appear inside the original event in your library, with all source clips, LUTs, and colour grading intact.
@@ -95,6 +94,7 @@ The `--fcpxml` path is cached after the first run. Re-running to keep a differen
 | `--speakers N` | Tell pyannote the exact number of speakers (improves diarization accuracy) |
 | `--fcpxml <path>` | Path to the exported FCP project XML or `.fcpxmld` bundle |
 | `--event <name>` | Override the FCP event name in the output (defaults to the source project's event) |
+| `--whisper openai\|mlx` | Transcription backend. `openai` (default) uses openai-whisper; `mlx` uses mlx-whisper (faster on Apple Silicon) |
 
 ---
 
@@ -104,18 +104,17 @@ The `--fcpxml` path is cached after the first run. Re-running to keep a differen
 final-cut-speaker-cutter/
 ├── diarize.py          # main script
 ├── .env                # HF_TOKEN (not committed)
-├── .env.example        # token template
 └── fcp-media/
     ├── MyProxy.mov           # proxy video (input)
     ├── MyProject.fcpxmld/    # exported FCP project XML (input)
     │   └── Info.fcpxml
     └── output/               # all generated files
         ├── MyProxy_audio_mono.wav
-        ├── MyProxy_segments.json
-        └── MyProxy — SPEAKER_XX removed.fcpxml
+        ├── MyProxy — SPEAKER_XX kept.fcpxml
+        └── MyProxy — SPEAKER_XX kept.txt
 ```
 
-Source files (proxy videos, FCP project XMLs) go in `fcp-media/`. Generated files (audio, cache, output FCPXML) go in `fcp-media/output/` and are excluded from git.
+Source files (proxy videos, FCP project XMLs) go in `fcp-media/`. Generated files go in `fcp-media/output/` and are excluded from git.
 
 ---
 
@@ -123,11 +122,11 @@ Source files (proxy videos, FCP project XMLs) go in `fcp-media/`. Generated file
 
 | File | Description |
 |---|---|
-| `*_audio_mono.wav` | Extracted audio used for diarization (cached) |
-| `*_segments.json` | Diarization results + per-speaker language info + FCPXML path (cached) |
-| `* — SPEAKER_XX+… removed.fcpxml` | The Final Cut Pro project ready to import |
+| `*_audio_mono.wav` | Extracted audio used for diarization |
+| `* — … removed.fcpxml` | The Final Cut Pro project ready to import |
+| `* — … removed.txt` | Full transcript of the kept speaker's speech |
 
-The JSON cache means re-running the script (e.g. to keep a different speaker) skips the slow diarization step and finishes in under a minute.
+When many speakers are removed, the filename switches to `… kept.fcpxml` to avoid hitting OS and FCP filename length limits.
 
 ---
 
@@ -135,47 +134,52 @@ The JSON cache means re-running the script (e.g. to keep a different speaker) sk
 
 ```
 === Speaker Diarization → FCPXML ===
-Video: Mauricio - SD 480p.mov
+Video: Mauricio Day 3.mov
+Extracting audio (mono 16kHz)...
+  → mauricio-day3_audio_mono.wav
+Loading pyannote diarization model...
+  Using Apple MPS (GPU)
+  Running diarization — this takes a few minutes for long videos...
+  Found 1538 segments
+  Skipping 5 speaker(s) with <1 min of speech.
 
-Audio already extracted (Mauricio - SD 480p_audio_mono.wav), skipping.
-Found cached diarization (Mauricio - SD 480p_segments.json). Use it? [Y/n]:
-
-Using cached FCPXML: Info.fcpxml
 Original FCPXML: Info.fcpxml
   Parsing edit decisions...
   4 source clip(s) on timeline
-  Target event: "Day 2" in library "Romania School.fcpbundle"
-Duration: ~120m 28s
+  Target event: "Day 3" in library "Mauricio.fcpbundle"
+Duration: ~65m 30s
 
 Transcribing speaker samples for identification...
-  Transcribing SPEAKER_06... [Romanian]
-  Transcribing SPEAKER_02... [Spanish]
+  Transcribing SPEAKER_06... [Spanish]
+  Transcribing SPEAKER_03... [Romanian]
   ...
 
 === Speaker Summary ===
-  [0] SPEAKER_06: 2608s  (36%)  [Romanian]
-       "orată, cașcum de eruca și rota roata..."
+  [0] SPEAKER_06: 1403s  (36%)  [Spanish]
+       "El hícaro normalmente está en una lengua..."
 
-  [1] SPEAKER_02: 2298s  (32%)  [Spanish]
-       "No, no, no. Horad, es como horar. Me voy por otro lado..."
-
+  [1] SPEAKER_03: 1306s  (33%)  [Romanian]
+       "Unii care o este ceva ce este într-o limba..."
   ...
 
 Which speaker(s) do you want to KEEP?
   Enter one number, or multiple comma-separated (e.g. 0,2)
-  [0] SPEAKER_06: 2608s  [Romanian]
-  [1] SPEAKER_02: 2298s  [Spanish]
-  ...
-Enter number(s): 1
+  [0] SPEAKER_06: 1403s  [Spanish]
+  [1] SPEAKER_03: 1306s  [Romanian]
+Enter number(s): 0
 
-Keeping SPEAKER_02, removing SPEAKER_00, SPEAKER_01, SPEAKER_03...
+Keeping SPEAKER_06, removing SPEAKER_03...
+
+Transcribing full audio for kept speaker(s)...
+  Transcribing SPEAKER_06 (677 segments, 23.4 min)...
+  Done [Spanish]
 
 === Done ===
-  Kept 1432 segments  (67.9 min)
-  Removed: 43.5 min of SPEAKER_06
-  Source files referenced: 4
+  Kept 677 clip(s)  (39.3 min)
+  Removed: 21.8 min of SPEAKER_03
 
-  Output: Mauricio - SD 480p — SPEAKER_00+SPEAKER_01+SPEAKER_03+… removed.fcpxml
+  Output: mauricio-day3 — SPEAKER_03 removed.fcpxml
+  Transcript: mauricio-day3 — SPEAKER_03 removed.txt
 
 Open in Final Cut Pro now? [y/N]:
 ```
@@ -187,9 +191,10 @@ Open in Final Cut Pro now? [y/N]:
 1. Edit your interview rough-cut in FCP (primary storyline only, no B-roll yet).
 2. Share/export a small proxy `.mov` for fast diarization.
 3. Export the FCP project as XML (`File → Export XML…`) and place it in `fcp-media/`.
-4. Run the script with `--fcpxml`, choose the speaker to keep.
+4. Run the script with `--fcpxml` and `--whisper mlx`, choose the speaker to keep.
 5. Import the output `.fcpxml` into FCP — it lands in your existing event with full-resolution clips.
-6. Layer B-roll, titles, colour grade, and effects on top of the cleaned edit.
+6. Use the `.txt` transcript for reference, subtitles, or further editing.
+7. Layer B-roll, titles, colour grade, and effects on top of the cleaned edit.
 
 ---
 
