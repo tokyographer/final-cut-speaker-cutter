@@ -7,12 +7,14 @@ CLAUDE.md
 # All script-generated files live in output/ subdirectories
 **/output/
 
-# Media files (source videos are not committed)
+# Media files and FCP projects (source files are not committed)
 *.mov
 *.mp4
 *.MP4
 *.m4v
 *.mxf
+*.fcpxml
+*.fcpxmld
 
 # Python
 __pycache__/
