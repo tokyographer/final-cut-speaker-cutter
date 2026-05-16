@@ -720,6 +720,9 @@ def main():
     resolved_fcpxml_path = FCPXML_PATH
     if resolved_fcpxml_path is None and cached_fcpxml_path:
         resolved_fcpxml_path = Path(cached_fcpxml_path)
+        # Relative paths in the cache are resolved relative to the script dir
+        if not resolved_fcpxml_path.is_absolute():
+            resolved_fcpxml_path = (Path(__file__).parent / resolved_fcpxml_path).resolve()
         if resolved_fcpxml_path.exists():
             print(f"Using cached FCPXML: {resolved_fcpxml_path.name}")
         else:

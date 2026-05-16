@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fcpxml>
+
+<fcpxml version="1.14">
+    <resources>
+        <format id="r1" name="FFVideoFormat2048x1152p2997" frameDuration="1001/30000s" width="2048" height="1152" colorSpace="1-1-1 (Rec. 709)"/>
+        <effect id="r2" name="Fade To Color" uid="FxPlug:F779C565-486D-4633-8035-0374B4DB8F5C"/>
+        <effect id="r3" name="Audio Crossfade" uid="FFAudioTransition"/>
+        <asset id="r4" name="DJI_20260424181123_0098_D" uid="8A89A443C264BD1397FA150B85B7BA76" start="1855816963/30000s" duration="3366363/30000s" hasVideo="1" format="r5" hasAudio="1" videoSources="1" audioSources="1" audioChannels="2" audioRate="48000" customLUTOverride="LUT:e4ec75ff88a16f2fff92080e19eb16db (DJI OSMO Pocket 3 D-Log M to Rec.709 V1)">
+            <media-rep kind="original-media" sig="8A89A443C264BD1397FA150B85B7BA76" src="file:///Volumes/Extreme%20Pro/Romania%20Level%200/DJI_20260424181123_0098_D.MP4">
+                <bookmark>Ym9vawQEAAAAAAUQQAAAAPU09f/nqGweLjdGvkU2DQMoctHOhk7ThxRbiximd6mnAAAAAAAAAAAAAAAAAAAAAAgDAAAgAAAAAQIAAPDV5+JE0B5mDKSJB0pEa9NJPG7ab7KU5onK6k9vn9rWBAAAAAMDAAAAGAAoBwAAAAEBAABWb2x1bWVzAAsAAAABAQAARXh0cmVtZSBQcm8ADwAAAAEBAABSb21hbmlhIExldmVsIDAAHQAAAAEBAABESklfMjAyNjA0MjQxODExMjNfMDA5OF9ELk1QNAAAABAAAAABBgAAOAAAAEgAAABcAAAAdAAAAAgAAAAEAwAAoEcAAAAAAAAAAAAAAQoAABAAAAABBgAAtAAAAMQAAADEAAAAxAAAAAgAAAAABAAAQcfN3839cKQYAAAAAQIAAAEAAAAAAAAADwAAAAAAAAAAAAAAAAAAAB4AAAABCQAAZmlsZTovLy9Wb2x1bWVzL0V4dHJlbWUlMjBQcm8vAAAIAAAABAMAAAAAcL7RAQAACAAAAAAEAADBzSfkQAAAACQAAAABAQAAM0M2Mzk1MTMtOEU1RS0zOEY3LTg1NDAtN0Y4NDI3Q0NGMjUyGAAAAAECAAABAQAAAAAAAO8TAAABAAAAAAAAAAAAAAAUAAAAAQEAAC9Wb2x1bWVzL0V4dHJlbWUgUHJvCAAAAAEJAABmaWxlOi8vLwwAAAABAQAATWFjaW50b3NoIEhECAAAAAQDAAAAkGKT5wAAAAgAAAAABAAAQcfR8v6AAAAkAAAAAQEAAEE1OTkzQzAzLUM3RTMtNDQ3NS1CMTNELTVFODMzMDkyQTUyNBgAAAABAgAAgQAAAAEAAADvEwAAAQAAAAAAAAAAAAAAAQAAAAEBAAAvAAAAYAAAAP7///8A8AAAAAAAAAcAAAACIAAAVAIAAAAAAAAFIAAAxAEAAAAAAAAQIAAA1AEAAAAAAAARIAAACAIAAAAAAAASIAAA6AEAAAAAAAATIAAA+AEAAAAAAAAgIAAANAIAAAAAAAAEAAAAAwMAAADwAAAEAAAAAwMAAAAAAAAEAAAAAwMAAAEAAAAUAAAAAQYAAMgCAADUAgAA4AIAANQCAADUAgAAtAAAAP7///8BAAAAYAIAAA4AAAAEEAAAnAAAAAAAAAAFEAAAzAAAAAAAAAAQEAAA9AAAAAAAAABAEAAA5AAAAAAAAAAAIAAA7AIAAAAAAAACIAAAqAEAAAAAAAAFIAAAFAEAAAAAAAAQIAAASAAAAAAAAAARIAAAXAEAAAAAAAASIAAAPAEAAAAAAAATIAAATAEAAAAAAAAgIAAAiAEAAAAAAAAQ0AAALAAAAAAAAACE8AAABAAAAAAAAAA=</bookmark>
+            </media-rep>
+            <metadata>
+                <md key="com.apple.proapps.studio.rawToLogConversion" value="0"/>
+                <md key="com.apple.proapps.spotlight.kMDItemProfileName" value="HD (1-1-1)"/>
+                <md key="com.apple.proapps.studio.cameraISO" value="0"/>
+                <md key="com.apple.proapps.studio.cameraColorTemperature" value="0"/>
+                <md key="com.apple.proapps.spotlight.kMDItemCodecs">
+                    <array>
+                        <string>HEVC</string>
+                        <string>MPEG-4 AAC</string>
+                    </array>
+                </md>
+                <md key="com.apple.proapps.mio.ingestDate" value="2026-04-27 19:49:22 +0200"/>
+            </metadata>
+        </asset>
+        <format id="r5" frameDuration="1001/30000s" width="2688" height="1512" colorSpace="1-1-1 (Rec. 709)"/>
+        <effect id="r6" name="Color Adjustments" uid="FxPlug:7E2022A5-202B-4EEB-A311-AC2B585D01B0"/>
+        <asset id="r7" name="DJI_20260424181421_0099_D" uid="0F2EEC04099F554402367F0D922AA15E" start="1861161302/30000s" duration="78229151/30000s" hasVideo="1" format="r5" hasAudio="1" videoSources="1" audioSources="1" audioChannels="2" audioRate="48000" customLUTOverride="LUT:e4ec75ff88a16f2fff92080e19eb16db (DJI OSMO Pocket 3 D-Log M to Rec.709 V1)">
+            <media-rep kind="original-media" sig="0F2EEC04099F554402367F0D922AA15E" src="file:///Volumes/Extreme%20Pro/Romania%20Level%200/DJI_20260424181421_0099_D.MP4">
+                <bookmark>Ym9vawQEAAAAAAUQQAAAAEt+nWeIbSgyAC/2X+ZRjzGhpGPK5wvhCyg6hf4AW831AAAAAAAAAAAAAAAAAAAAAAgDAAAgAAAAAQIAANLg+g7cUjVAUaxgiTR6wcjoxFJihI3dXD8HVvmg0/KEBAAAAAMDAAAAGAAoBwAAAAEBAABWb2x1bWVzAAsAAAABAQAARXh0cmVtZSBQcm8ADwAAAAEBAABSb21hbmlhIExldmVsIDAAHQAAAAEBAABESklfMjAyNjA0MjQxODE0MjFfMDA5OV9ELk1QNAAAABAAAAABBgAAOAAAAEgAAABcAAAAdAAAAAgAAAAEAwAAoEcAAAAAAAAAAAAAAQoAABAAAAABBgAAtAAAAMQAAADEAAAAxAAAAAgAAAAABAAAQcfN4CbKPXEYAAAAAQIAAAEAAAAAAAAADwAAAAAAAAAAAAAAAAAAAB4AAAABCQAAZmlsZTovLy9Wb2x1bWVzL0V4dHJlbWUlMjBQcm8vAAAIAAAABAMAAAAAcL7RAQAACAAAAAAEAADBzSfkQAAAACQAAAABAQAAM0M2Mzk1MTMtOEU1RS0zOEY3LTg1NDAtN0Y4NDI3Q0NGMjUyGAAAAAECAAABAQAAAAAAAO8TAAABAAAAAAAAAAAAAAAUAAAAAQEAAC9Wb2x1bWVzL0V4dHJlbWUgUHJvCAAAAAEJAABmaWxlOi8vLwwAAAABAQAATWFjaW50b3NoIEhECAAAAAQDAAAAkGKT5wAAAAgAAAAABAAAQcfR8v6AAAAkAAAAAQEAAEE1OTkzQzAzLUM3RTMtNDQ3NS1CMTNELTVFODMzMDkyQTUyNBgAAAABAgAAgQAAAAEAAADvEwAAAQAAAAAAAAAAAAAAAQAAAAEBAAAvAAAAYAAAAP7///8A8AAAAAAAAAcAAAACIAAAVAIAAAAAAAAFIAAAxAEAAAAAAAAQIAAA1AEAAAAAAAARIAAACAIAAAAAAAASIAAA6AEAAAAAAAATIAAA+AEAAAAAAAAgIAAANAIAAAAAAAAEAAAAAwMAAADwAAAEAAAAAwMAAAAAAAAEAAAAAwMAAAEAAAAUAAAAAQYAAMgCAADUAgAA4AIAANQCAADUAgAAtAAAAP7///8BAAAAYAIAAA4AAAAEEAAAnAAAAAAAAAAFEAAAzAAAAAAAAAAQEAAA9AAAAAAAAABAEAAA5AAAAAAAAAAAIAAA7AIAAAAAAAACIAAAqAEAAAAAAAAFIAAAFAEAAAAAAAAQIAAASAAAAAAAAAARIAAAXAEAAAAAAAASIAAAPAEAAAAAAAATIAAATAEAAAAAAAAgIAAAiAEAAAAAAAAQ0AAALAAAAAAAAACE8AAABAAAAAAAAAA=</bookmark>
+            </media-rep>
+            <metadata>
+                <md key="com.apple.proapps.studio.rawToLogConversion" value="0"/>
+                <md key="com.apple.proapps.spotlight.kMDItemProfileName" value="HD (1-1-1)"/>
+                <md key="com.apple.proapps.studio.cameraISO" value="0"/>
+                <md key="com.apple.proapps.studio.cameraColorTemperature" value="0"/>
+                <md key="com.apple.proapps.spotlight.kMDItemCodecs">
+                    <array>
+                        <string>HEVC</string>
+                        <string>MPEG-4 AAC</string>
+                    </array>
+                </md>
+                <md key="com.apple.proapps.mio.ingestDate" value="2026-04-27 19:49:22 +0200"/>
+            </metadata>
+        </asset>
+        <asset id="r8" name="DJI_20260424185749_0100_D" uid="C1416F0C0531D13FEA20340A2376D108" start="1939391454/30000s" duration="78233155/30000s" hasVideo="1" format="r5" hasAudio="1" videoSources="1" audioSources="1" audioChannels="2" audioRate="48000" customLUTOverride="LUT:e4ec75ff88a16f2fff92080e19eb16db (DJI OSMO Pocket 3 D-Log M to Rec.709 V1)">
+            <media-rep kind="original-media" sig="C1416F0C0531D13FEA20340A2376D108" src="file:///Volumes/Extreme%20Pro/Romania%20Level%200/DJI_20260424185749_0100_D.MP4">
+                <bookmark>Ym9vawQEAAAAAAUQQAAAAKGlPHx+jdNjGc7r1EKf8OLJ3uBaMymEWTm9+t8unBCzAAAAAAAAAAAAAAAAAAAAAAgDAAAgAAAAAQIAAIhWbNdvlcqqDIPd9OnXBPnIWYgPSpdk32GjIQngtZjGBAAAAAMDAAAAGAAoBwAAAAEBAABWb2x1bWVzAAsAAAABAQAARXh0cmVtZSBQcm8ADwAAAAEBAABSb21hbmlhIExldmVsIDAAHQAAAAEBAABESklfMjAyNjA0MjQxODU3NDlfMDEwMF9ELk1QNAAAABAAAAABBgAAOAAAAEgAAABcAAAAdAAAAAgAAAAEAwAAoEcAAAAAAAAAAAAAAQoAABAAAAABBgAAtAAAAMQAAADEAAAAxAAAAAgAAAAABAAAQcfN5T6qPXEYAAAAAQIAAAEAAAAAAAAADwAAAAAAAAAAAAAAAAAAAB4AAAABCQAAZmlsZTovLy9Wb2x1bWVzL0V4dHJlbWUlMjBQcm8vAAAIAAAABAMAAAAAcL7RAQAACAAAAAAEAADBzSfkQAAAACQAAAABAQAAM0M2Mzk1MTMtOEU1RS0zOEY3LTg1NDAtN0Y4NDI3Q0NGMjUyGAAAAAECAAABAQAAAAAAAO8TAAABAAAAAAAAAAAAAAAUAAAAAQEAAC9Wb2x1bWVzL0V4dHJlbWUgUHJvCAAAAAEJAABmaWxlOi8vLwwAAAABAQAATWFjaW50b3NoIEhECAAAAAQDAAAAkGKT5wAAAAgAAAAABAAAQcfR8v6AAAAkAAAAAQEAAEE1OTkzQzAzLUM3RTMtNDQ3NS1CMTNELTVFODMzMDkyQTUyNBgAAAABAgAAgQAAAAEAAADvEwAAAQAAAAAAAAAAAAAAAQAAAAEBAAAvAAAAYAAAAP7///8A8AAAAAAAAAcAAAACIAAAVAIAAAAAAAAFIAAAxAEAAAAAAAAQIAAA1AEAAAAAAAARIAAACAIAAAAAAAASIAAA6AEAAAAAAAATIAAA+AEAAAAAAAAgIAAANAIAAAAAAAAEAAAAAwMAAADwAAAEAAAAAwMAAAAAAAAEAAAAAwMAAAEAAAAUAAAAAQYAAMgCAADUAgAA4AIAANQCAADUAgAAtAAAAP7///8BAAAAYAIAAA4AAAAEEAAAnAAAAAAAAAAFEAAAzAAAAAAAAAAQEAAA9AAAAAAAAABAEAAA5AAAAAAAAAAAIAAA7AIAAAAAAAACIAAAqAEAAAAAAAAFIAAAFAEAAAAAAAAQIAAASAAAAAAAAAARIAAAXAEAAAAAAAASIAAAPAEAAAAAAAATIAAATAEAAAAAAAAgIAAAiAEAAAAAAAAQ0AAALAAAAAAAAACE8AAABAAAAAAAAAA=</bookmark>
+            </media-rep>
+            <metadata>
+                <md key="com.apple.proapps.studio.rawToLogConversion" value="0"/>
+                <md key="com.apple.proapps.spotlight.kMDItemProfileName" value="HD (1-1-1)"/>
+                <md key="com.apple.proapps.studio.cameraISO" value="0"/>
+                <md key="com.apple.proapps.studio.cameraColorTemperature" value="0"/>
+                <md key="com.apple.proapps.spotlight.kMDItemCodecs">
+                    <array>
+                        <string>HEVC</string>
+                        <string>MPEG-4 AAC</string>
+                    </array>
+                </md>
+                <md key="com.apple.proapps.mio.ingestDate" value="2026-04-27 19:49:22 +0200"/>
+            </metadata>
+        </asset>
+        <asset id="r9" name="DJI_20260424194117_0101_D" uid="A15F45937A41483B4137F8C3B67A46B3" start="2017625610/30000s" duration="57022966/30000s" hasVideo="1" format="r5" hasAudio="1" videoSources="1" audioSources="1" audioChannels="2" audioRate="48000" customLUTOverride="LUT:e4ec75ff88a16f2fff92080e19eb16db (DJI OSMO Pocket 3 D-Log M to Rec.709 V1)">
+            <media-rep kind="original-media" sig="A15F45937A41483B4137F8C3B67A46B3" src="file:///Volumes/Extreme%20Pro/Romania%20Level%200/DJI_20260424194117_0101_D.MP4">
+                <bookmark>Ym9vawQEAAAAAAUQQAAAABxn6qslMnNUTgtykxFO8rgrMh0wRKqlbO+h4aScgISCAAAAAAAAAAAAAAAAAAAAAAgDAAAgAAAAAQIAACMkquJrw401+BIlvEECqS8gtk6p+fNPSWvbeIVFSOILBAAAAAMDAAAAGAAoBwAAAAEBAABWb2x1bWVzAAsAAAABAQAARXh0cmVtZSBQcm8ADwAAAAEBAABSb21hbmlhIExldmVsIDAAHQAAAAEBAABESklfMjAyNjA0MjQxOTQxMTdfMDEwMV9ELk1QNAAAABAAAAABBgAAOAAAAEgAAABcAAAAdAAAAAgAAAAEAwAAoEcAAAAAAAAAAAAAAQoAABAAAAABBgAAtAAAAMQAAADEAAAAxAAAAAgAAAAABAAAQcfN6lb+uFIYAAAAAQIAAAEAAAAAAAAADwAAAAAAAAAAAAAAAAAAAB4AAAABCQAAZmlsZTovLy9Wb2x1bWVzL0V4dHJlbWUlMjBQcm8vAAAIAAAABAMAAAAAcL7RAQAACAAAAAAEAADBzSfkQAAAACQAAAABAQAAM0M2Mzk1MTMtOEU1RS0zOEY3LTg1NDAtN0Y4NDI3Q0NGMjUyGAAAAAECAAABAQAAAAAAAO8TAAABAAAAAAAAAAAAAAAUAAAAAQEAAC9Wb2x1bWVzL0V4dHJlbWUgUHJvCAAAAAEJAABmaWxlOi8vLwwAAAABAQAATWFjaW50b3NoIEhECAAAAAQDAAAAkGKT5wAAAAgAAAAABAAAQcfR8v6AAAAkAAAAAQEAAEE1OTkzQzAzLUM3RTMtNDQ3NS1CMTNELTVFODMzMDkyQTUyNBgAAAABAgAAgQAAAAEAAADvEwAAAQAAAAAAAAAAAAAAAQAAAAEBAAAvAAAAYAAAAP7///8A8AAAAAAAAAcAAAACIAAAVAIAAAAAAAAFIAAAxAEAAAAAAAAQIAAA1AEAAAAAAAARIAAACAIAAAAAAAASIAAA6AEAAAAAAAATIAAA+AEAAAAAAAAgIAAANAIAAAAAAAAEAAAAAwMAAADwAAAEAAAAAwMAAAAAAAAEAAAAAwMAAAEAAAAUAAAAAQYAAMgCAADUAgAA4AIAANQCAADUAgAAtAAAAP7///8BAAAAYAIAAA4AAAAEEAAAnAAAAAAAAAAFEAAAzAAAAAAAAAAQEAAA9AAAAAAAAABAEAAA5AAAAAAAAAAAIAAA7AIAAAAAAAACIAAAqAEAAAAAAAAFIAAAFAEAAAAAAAAQIAAASAAAAAAAAAARIAAAXAEAAAAAAAASIAAAPAEAAAAAAAATIAAATAEAAAAAAAAgIAAAiAEAAAAAAAAQ0AAALAAAAAAAAACE8AAABAAAAAAAAAA=</bookmark>
+            </media-rep>
+            <metadata>
+                <md key="com.apple.proapps.studio.rawToLogConversion" value="0"/>
+                <md key="com.apple.proapps.spotlight.kMDItemProfileName" value="HD (1-1-1)"/>
+                <md key="com.apple.proapps.studio.cameraISO" value="0"/>
+                <md key="com.apple.proapps.studio.cameraColorTemperature" value="0"/>
+                <md key="com.apple.proapps.spotlight.kMDItemCodecs">
+                    <array>
+                        <string>HEVC</string>
+                        <string>MPEG-4 AAC</string>
+                    </array>
+                </md>
+                <md key="com.apple.proapps.mio.ingestDate" value="2026-04-27 19:49:22 +0200"/>
+            </metadata>
+        </asset>
+    </resources>
+    <library location="file:///Users/tokyographer1/Movies/FINAL%20CUT%20PRO/Romania%20School.fcpbundle/">
+        <event name="Day 2" uid="3179239A-8687-4489-BF08-FB1CB38707E4">
+            <project name="Mauricio" uid="8D3261EA-0643-4ACD-B5A4-F0BB66EC9657" modDate="2026-05-15 23:10:58 +0200">
+                <sequence format="r1" duration="216851635/30000s" tcStart="0s" tcFormat="NDF" audioLayout="stereo" audioRate="48k">
+                    <spine>
+                        <transition name="Fade To Color" offset="0s" duration="30030/30000s">
+                            <filter-video ref="r2" name="Fade To Color">
+                                <data key="effectConfig">YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05TS2V5ZWRBcmNoaXZlctEICVRyb290gAGlCwwVFhdVJG51bGzTDQ4PEBIUV05TLmtleXNaTlMub2JqZWN0c1YkY2xhc3OhEYACoROAA4AEXXBsdWdpblZlcnNpb24QAtIYGRobWiRjbGFzc25hbWVYJGNsYXNzZXNfEBNOU011dGFibGVEaWN0aW9uYXJ5oxocHVxOU0RpY3Rpb25hcnlYTlNPYmplY3QIERokKTI3SUxRU1lfZm55gIKEhoiKmJqfqrPJzdoAAAAAAAABAQAAAAAAAAAeAAAAAAAAAAAAAAAAAAAA4w==</data>
+                                <param name="Midpoint" key="1" value="50"/>
+                                <param name="Hold" key="2" value="25"/>
+                            </filter-video>
+                            <filter-audio ref="r3" name="Audio Crossfade"/>
+                        </transition>
+                        <asset-clip ref="r4" offset="0s" name="DJI_20260424181123_0098_D" start="1855816963/30000s" duration="3366363/30000s" format="r5" tcFormat="DF" audioRole="dialogue">
+                            <filter-video ref="r6" name="Color Adjustments">
+                                <data key="effectConfig">YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05TS2V5ZWRBcmNoaXZlctEICVRyb290gAGlCwwVFhdVJG51bGzTDQ4PEBIUV05TLmtleXNaTlMub2JqZWN0c1YkY2xhc3OhEYACoROAA4AEXXBsdWdpblZlcnNpb24QAtIYGRobWiRjbGFzc25hbWVYJGNsYXNzZXNfEBNOU011dGFibGVEaWN0aW9uYXJ5oxocHVxOU0RpY3Rpb25hcnlYTlNPYmplY3QIERokKTI3SUxRU1lfZm55gIKEhoiKmJqfqrPJzdoAAAAAAAABAQAAAAAAAAAeAAAAAAAAAAAAAAAAAAAA4w==</data>
+                                <param name="Control Range" key="19" value="0 (SDR)"/>
+                                <param name="" key="20" value="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPCFET0NUWVBFIG96eG1sc2NlbmU+Cjxvem1sIHZlcnNpb249IjUuMTQiPgoKPGZhY3RvcnkgaWQ9IjEiIHV1aWQ9IjE0NTA0OTJkODU0NTQ5Mzk4YzA3M2MxOGM2NDRhYWUxIj4KCTxkZXNjcmlwdGlvbj5DaGFubmVsPC9kZXNjcmlwdGlvbj4KCTxtYW51ZmFjdHVyZXI+QXBwbGU8L21hbnVmYWN0dXJlcj4KCTx2ZXJzaW9uPjE8L3ZlcnNpb24+CjwvZmFjdG9yeT4KCgo8cGFyYW1ldGVyIG5hbWU9IiIgaWQ9IjIwIiBmbGFncz0iNDI5NTAzMjg0OCI+Cgk8ZmxhZ3M+NDI5NTAzMjg0ODwvZmxhZ3M+Cgk8bnVtYmVyT2ZLZXlwb2ludHM+MDwvbnVtYmVyT2ZLZXlwb2ludHM+Cgk8ZGVmYXVsdFZhbD4qKioqKioqKio2SWVNYi1nT0xCb0ExMUkqRTYxLSpJNC1rZE03NU5aUWJCZFBxdE43NDNtTXFWZFJhSm1KMEZvUHItTTc0eFdPYUpYUjVBRyoqNDRjM3dFMW90SEdxSnROS0YtUWFCY09MTlpRaDI2MEo2WUE2KipjRWhKNzR0cFA0azYyRmNZOEg2ckdJbERJSkEqKioqKioqKi0qRSoqKioqKioqKkEqKioqKioqKioqKioqKioqKioqKktFKio8L2RlZmF1bHRWYWw+Cgk8ZGF0YVZhbHVlPioqKioqKioqKjZJZU1iLWdPTEJvQTExSSpFNjEtKkk0LWtkTTc1TlpRYkJkUHF0Tjc0M21NcVZkUmFKbUowRm9Qci1NNzR4V09hSlhSNUFHKio0NGMzd0Uxb3RIR3FKdE5LRi1RYUJjT0xOWlFoMjYwSjZZQTYqKmNFaEo3NHRwUDRrNjJGY1k4SDZyR0lsRElKQSoqKioqKioqLSpFKioqKioqKioqQSoqKioqKioqKioqKioqKioqKioqS0UqKjwvZGF0YVZhbHVlPgo8L3BhcmFtZXRlcj4KCjwvb3ptbD4K"/>
+                                <param name="" key="23" value="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPCFET0NUWVBFIG96eG1sc2NlbmU+Cjxvem1sIHZlcnNpb249IjUuMTQiPgoKPGZhY3RvcnkgaWQ9IjEiIHV1aWQ9IjRkMGU0OGQ4NGZjYTQyNGQ4MmFhOThhMDI3YzZlYzVjIj4KCTxkZXNjcmlwdGlvbj5DaGFubmVsPC9kZXNjcmlwdGlvbj4KCTxtYW51ZmFjdHVyZXI+QXBwbGU8L21hbnVmYWN0dXJlcj4KCTx2ZXJzaW9uPjE8L3ZlcnNpb24+CjwvZmFjdG9yeT4KCgo8cGFyYW1ldGVyIG5hbWU9IiIgaWQ9IjIzIiBmbGFncz0iNDI5OTIyNzE4NCI+Cgk8ZmxhZ3M+NDI5OTIyNzE4NDwvZmxhZ3M+Cgk8bnVtYmVyT2ZLZXlwb2ludHM+MDwvbnVtYmVyT2ZLZXlwb2ludHM+Cgk8ZGVmYXVsdFZhbD4qKioqKioqKipSMmVNYi1nT0xCb0ExMUkqRTYxLSpJNC1rZE03NU5aUWJCZFBxdE43NDNtTXFWZFJhSm1KMEZvUHItTTc0eFdPYUpYUjVBRyoqNDRjM3dFMW90SEdxSnROS0YtUWFCY09MTlpRaDI2MEo2WUE2Ki1ja2dBNUpJWVBiSmdQQnNCMVV3RTJGNkgzLUlLM2xVTjRWZ1A0bGdQNGxrUDRsZ1A0bGdQSzRCalBiRm1NTEJvTExCY01LRmpSckJMTUw3aFI0Vk9NYWxWTXFoRVBxWmlSM05yTUw3aFI0VklSNFppUjNsaE9LRm9QcXRaUXBGZFBiRks3NEJnTUxCbktyQmNNS0ZqUnJCSU9LdG9LYVZkTnFWZ09LUmNSNUJPUXEzb1JMN1ZSNFpqUFpkV1FhWmJPNUZpTkxCbks0SnNRNHhuUkw3WkxhcGRONUZqUGFKbkpxM21QTEZjSnJCY01LRmpSckFXR2xXS1U2KjBvVnNUNjAzTzc0QmdNTEJuUGEzaE5KVVlNcWxWUXJCWlFwd0U0My0tRklWMklZQmpQNHhtRXF4bVFhSlhSM05WUDVKWlF1Nlc2cHdFNDMtLUZJVjJJWUJqUDR4bUVxeG1RYUpYUjNOVlA1SlpRcFZDSW94V09hSlhSKio2Ki0yKjRVKlkqMFkqQVUqcioyWSpIKi1EKjMyKkpFLVAqNVUqVUUwRCo3YypjRTBhKjlBKmlVMTQqQjIqcioxYipEKip6azI1KkVrLTFVMkgqRnMtN2szMCpJSS1NKioqKioqKioqNi0qKioqKioqKiowRSoqKioqKioqKioqKioqKioqKiozZDwvZGVmYXVsdFZhbD4KCTxkYXRhVmFsdWU+KioqKioqKioqVnNlTWItZ09MQm9BMTFJKkU2MS0qSTQta2RNNzVOWlFiQmRQcXRONzQzbU1xVmRSYUptSjBGb1ByLU03NHhXT2FKWFI1QUcqKjQ0YzN3RTFvdEhHcUp0TktGLVFhQmNPTE5aUWgyNjBKNllBNiotY2tnQTgzSVlQYkpnUEJzQjFVd0UyRjZIMy1JSzNsVU40VmdRNGxvUzVtKlY2V0FZN0dNYks0QmpQYkZtTUxCb0xMQmNNS0ZqUnJCTE1MN2hSNFZPTWFsVk1xaEVQcVppUjNOck1MN2hSNFZJUjRaaVIzbGhPS0ZvUHF0WlFwRmRQYkZLNzRCZ01MQm5LckJjTUtGalJyQklPS3RvS2FWZE5xVmdPS1JjUjVCT1FxM29STDdWUjRaalBaZFdRYVpiTzVGaU5MQm5LNEpzUTR4blJMN1pMYXBkTjVGalBhSm5KcTNtUExGY0pyQmNNS0ZqUnJBVyoqKioqMDkqNkZuZzZZMVR1VFlXazhSTXJtNyp5OHFzVSo2V0UzbGFGMDcqdGpHMTZZMWhUa01Xa0U3b3lHOHo3Q2F5Nmc0RzJsc1dFTk9qN2g2ZDhXZ2dLV0ZYUDQzblFxdFZQS0pNNzRCZ01MQm5OTEJUMi1WRUVJSjZGMzcxUHFsalFZQmpRYjdaTXJGS01LbHBOTENXOUd0VDItVkVFSUo2RjM3MVBxbGpRWUJqUWI3Wk1yRktNS2xwTkxCTUhaQkRNYWRaTXJFKjAqKkYqLWMqNyoqZCoxNipCay03KjJrKkhrLUYqM0kqS2stcyo2MipYazBPKjgyKmRVMG4qOWMqbFUxRipCayp0azFrKkR3LS1rMkEqRjItM1UyUCpHKi02VTJiKkdrLUFFMnEqSGctRSozMypJYy1KRTNTKkxZLVQqNEwqKioqKioqKipVMioqKioqKioqKjlrKioqKioqKioqKioqKioqKioqKk8qKjwvZGF0YVZhbHVlPgo8L3BhcmFtZXRlcj4KCjwvb3ptbD4K"/>
+                                <param name="trigger Enhance" key="18" value="6"/>
+                                <param name="Exposure" key="3" value="-0.644192"/>
+                                <param name="Contrast" key="17" value="0"/>
+                                <param name="Brightness" key="2" value="-8.15356"/>
+                                <param name="Highlights" key="7" value="7.21735"/>
+                                <param name="Black Point" key="1" value="0"/>
+                                <param name="Shadows" key="4" value="18.8355"/>
+                                <param name="Saturation" key="16" value="7.42176"/>
+                                <param name="Highlights Warmth" key="10" value="6.99731"/>
+                                <param name="Highlights Tint" key="11" value="-5.2296"/>
+                                <param name="Midtones Warmth" key="12" value="-18.2593"/>
+                                <param name="Midtones Tint" key="13" value="7.77121"/>
+                                <param name="Shadows Warmth" key="14" value="-2.51739"/>
+                                <param name="Shadows Tint" key="15" value="3.44374"/>
+                            </filter-video>
+                        </asset-clip>
+                        <asset-clip ref="r7" offset="3366363/30000s" name="DJI_20260424181421_0099_D" start="1861161302/30000s" duration="78229151/30000s" format="r5" tcFormat="DF" audioRole="dialogue">
+                            <filter-video ref="r6" name="Color Adjustments">
+                                <data key="effectConfig">YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05TS2V5ZWRBcmNoaXZlctEICVRyb290gAGlCwwVFhdVJG51bGzTDQ4PEBIUV05TLmtleXNaTlMub2JqZWN0c1YkY2xhc3OhEYACoROAA4AEXXBsdWdpblZlcnNpb24QAtIYGRobWiRjbGFzc25hbWVYJGNsYXNzZXNfEBNOU011dGFibGVEaWN0aW9uYXJ5oxocHVxOU0RpY3Rpb25hcnlYTlNPYmplY3QIERokKTI3SUxRU1lfZm55gIKEhoiKmJqfqrPJzdoAAAAAAAABAQAAAAAAAAAeAAAAAAAAAAAAAAAAAAAA4w==</data>
+                                <param name="Control Range" key="19" value="0 (SDR)"/>
+                                <param name="" key="20" value="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPCFET0NUWVBFIG96eG1sc2NlbmU+Cjxvem1sIHZlcnNpb249IjUuMTQiPgoKPGZhY3RvcnkgaWQ9IjEiIHV1aWQ9IjE0NTA0OTJkODU0NTQ5Mzk4YzA3M2MxOGM2NDRhYWUxIj4KCTxkZXNjcmlwdGlvbj5DaGFubmVsPC9kZXNjcmlwdGlvbj4KCTxtYW51ZmFjdHVyZXI+QXBwbGU8L21hbnVmYWN0dXJlcj4KCTx2ZXJzaW9uPjE8L3ZlcnNpb24+CjwvZmFjdG9yeT4KCgo8cGFyYW1ldGVyIG5hbWU9IiIgaWQ9IjIwIiBmbGFncz0iNDI5NTAzMjg0OCI+Cgk8ZmxhZ3M+NDI5NTAzMjg0ODwvZmxhZ3M+Cgk8bnVtYmVyT2ZLZXlwb2ludHM+MDwvbnVtYmVyT2ZLZXlwb2ludHM+Cgk8ZGVmYXVsdFZhbD4qKioqKioqKio2SWVNYi1nT0xCb0ExMUkqRTYxLSpJNC1rZE03NU5aUWJCZFBxdE43NDNtTXFWZFJhSm1KMEZvUHItTTc0eFdPYUpYUjVBRyoqNDRjM3dFMW90SEdxSnROS0YtUWFCY09MTlpRaDI2MEo2WUE2KipjRWhKNzR0cFA0azYyRmNZOEg2ckdJbERJSkEqKioqKioqKi0qRSoqKioqKioqKkEqKioqKioqKioqKioqKioqKioqKktFKio8L2RlZmF1bHRWYWw+Cgk8ZGF0YVZhbHVlPioqKioqKioqKjZJZU1iLWdPTEJvQTExSSpFNjEtKkk0LWtkTTc1TlpRYkJkUHF0Tjc0M21NcVZkUmFKbUowRm9Qci1NNzR4V09hSlhSNUFHKio0NGMzd0Uxb3RIR3FKdE5LRi1RYUJjT0xOWlFoMjYwSjZZQTYqKmNFaEo3NHRwUDRrNjJGY1k4SDZyR0lsRElKQSoqKioqKioqLSpFKioqKioqKioqQSoqKioqKioqKioqKioqKioqKioqS0UqKjwvZGF0YVZhbHVlPgo8L3BhcmFtZXRlcj4KCjwvb3ptbD4K"/>
+                                <param name="" key="23" value="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPCFET0NUWVBFIG96eG1sc2NlbmU+Cjxvem1sIHZlcnNpb249IjUuMTQiPgoKPGZhY3RvcnkgaWQ9IjEiIHV1aWQ9IjRkMGU0OGQ4NGZjYTQyNGQ4MmFhOThhMDI3YzZlYzVjIj4KCTxkZXNjcmlwdGlvbj5DaGFubmVsPC9kZXNjcmlwdGlvbj4KCTxtYW51ZmFjdHVyZXI+QXBwbGU8L21hbnVmYWN0dXJlcj4KCTx2ZXJzaW9uPjE8L3ZlcnNpb24+CjwvZmFjdG9yeT4KCgo8cGFyYW1ldGVyIG5hbWU9IiIgaWQ9IjIzIiBmbGFncz0iNDI5OTIyNzE4NCI+Cgk8ZmxhZ3M+NDI5OTIyNzE4NDwvZmxhZ3M+Cgk8bnVtYmVyT2ZLZXlwb2ludHM+MDwvbnVtYmVyT2ZLZXlwb2ludHM+Cgk8ZGVmYXVsdFZhbD4qKioqKioqKipSMmVNYi1nT0xCb0ExMUkqRTYxLSpJNC1rZE03NU5aUWJCZFBxdE43NDNtTXFWZFJhSm1KMEZvUHItTTc0eFdPYUpYUjVBRyoqNDRjM3dFMW90SEdxSnROS0YtUWFCY09MTlpRaDI2MEo2WUE2Ki1ja2dBNUpJWVBiSmdQQnNCMVV3RTJGNkgzLUlLM2xVTjRWZ1A0bGdQNGxrUDRsZ1A0bGdQSzRCalBiRm1NTEJvTExCY01LRmpSckJMTUw3aFI0Vk9NYWxWTXFoRVBxWmlSM05yTUw3aFI0VklSNFppUjNsaE9LRm9QcXRaUXBGZFBiRks3NEJnTUxCbktyQmNNS0ZqUnJCSU9LdG9LYVZkTnFWZ09LUmNSNUJPUXEzb1JMN1ZSNFpqUFpkV1FhWmJPNUZpTkxCbks0SnNRNHhuUkw3WkxhcGRONUZqUGFKbkpxM21QTEZjSnJCY01LRmpSckFXR2xXS1U2KjBvVnNUNjAzTzc0QmdNTEJuUGEzaE5KVVlNcWxWUXJCWlFwd0U0My0tRklWMklZQmpQNHhtRXF4bVFhSlhSM05WUDVKWlF1Nlc2cHdFNDMtLUZJVjJJWUJqUDR4bUVxeG1RYUpYUjNOVlA1SlpRcFZDSW94V09hSlhSKio2Ki0yKjRVKlkqMFkqQVUqcioyWSpIKi1EKjMyKkpFLVAqNVUqVUUwRCo3YypjRTBhKjlBKmlVMTQqQjIqcioxYipEKip6azI1KkVrLTFVMkgqRnMtN2szMCpJSS1NKioqKioqKioqNi0qKioqKioqKiowRSoqKioqKioqKioqKioqKioqKiozZDwvZGVmYXVsdFZhbD4KCTxkYXRhVmFsdWU+KioqKioqKioqV0llTWItZ09MQm9BMTFJKkU2MS0qSTQta2RNNzVOWlFiQmRQcXRONzQzbU1xVmRSYUptSjBGb1ByLU03NHhXT2FKWFI1QUcqKjQ0YzN3RTFvdEhHcUp0TktGLVFhQmNPTE5aUWgyNjBKNllBNiotY2tnQThKSVlQYkpnUEJzQjFVd0UyRjZIMy1JSzNsVU40VmdRNUZzVDYwMlc2bUVaN1dRY0s0QmpQYkZtTUxCb0xMQmNNS0ZqUnJCTE1MN2hSNFZPTWFsVk1xaEVQcVppUjNOck1MN2hSNFZJUjRaaVIzbGhPS0ZvUHF0WlFwRmRQYkZLNzRCZ01MQm5LckJjTUtGalJyQklPS3RvS2FWZE5xVmdPS1JjUjVCT1FxM29STDdWUjRaalBaZFdRYVpiTzVGaU5MQm5LNEpzUTR4blJMN1pMYXBkTjVGalBhSm5KcTNtUExGY0pyQmNNS0ZqUnJBVyoqKioqMDkqY09NdTZmeWNWNUFXa0NsZFpHOSp2OG5TNlh2MEE2MCoqVzkqaGFTbzZmeUZEdFFXRUdWRTNXNypCdmI4Nlh5QXhoNldrR0VZUkc3KlU4RzNvV2NmOTBwTzc0QmdNTEJuUGEzaE5KVVlNcWxWUXJCWlFwd0U0My0tRklWMklZQmpQNHhtRXF4bVFhSlhSM05WUDVKWlF1Nmk5cHdFNDMtLUZJVjJJWUJqUDR4bUVxeG1RYUpYUjNOVlA1SlpRcFZDSW94V09hSlhSKio2Ki0yKjRVKlkqMFkqQVUqcioyWSpIKi1EKjMyKkpFLVAqNVUqVUUwRCo3YypjRTBhKjlBKmlVMTQqQjIqcioxYipEKip6azI1KkVrLTJFMksqRmctNioyWipHUS05KjJsKkhNLUNrMyoqSUktR1UzRCpKYy1NazN5Kk0yLWIqKioqKioqKio2LSoqKioqKioqKjEqKioqKioqKioqKioqKioqKioqKjRaPC9kYXRhVmFsdWU+CjwvcGFyYW1ldGVyPgoKPC9vem1sPgo="/>
+                                <param name="trigger Enhance" key="18" value="6"/>
+                                <param name="Exposure" key="3" value="1.10128"/>
+                                <param name="Contrast" key="17" value="0"/>
+                                <param name="Brightness" key="2" value="2.87071"/>
+                                <param name="Highlights" key="7" value="-1.13475"/>
+                                <param name="Black Point" key="1" value="-1.31654"/>
+                                <param name="Shadows" key="4" value="4.02008"/>
+                                <param name="Saturation" key="16" value="10.5196"/>
+                                <param name="Highlights Warmth" key="10" value="-7.38789"/>
+                                <param name="Highlights Tint" key="11" value="-7.3961"/>
+                                <param name="Midtones Warmth" key="12" value="-10.2589"/>
+                                <param name="Midtones Tint" key="13" value="0.379276"/>
+                                <param name="Shadows Warmth" key="14" value="-5.05154"/>
+                                <param name="Shadows Tint" key="15" value="-5.70016"/>
+                            </filter-video>
+                        </asset-clip>
+                        <asset-clip ref="r8" offset="81595514/30000s" name="DJI_20260424185749_0100_D" start="1939391454/30000s" duration="78233155/30000s" format="r5" tcFormat="DF" audioRole="dialogue">
+                            <filter-video ref="r6" name="Color Adjustments">
+                                <data key="effectConfig">YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05TS2V5ZWRBcmNoaXZlctEICVRyb290gAGlCwwVFhdVJG51bGzTDQ4PEBIUV05TLmtleXNaTlMub2JqZWN0c1YkY2xhc3OhEYACoROAA4AEXXBsdWdpblZlcnNpb24QAtIYGRobWiRjbGFzc25hbWVYJGNsYXNzZXNfEBNOU011dGFibGVEaWN0aW9uYXJ5oxocHVxOU0RpY3Rpb25hcnlYTlNPYmplY3QIERokKTI3SUxRU1lfZm55gIKEhoiKmJqfqrPJzdoAAAAAAAABAQAAAAAAAAAeAAAAAAAAAAAAAAAAAAAA4w==</data>
+                                <param name="Control Range" key="19" value="0 (SDR)"/>
+                                <param name="" key="20" value="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPCFET0NUWVBFIG96eG1sc2NlbmU+Cjxvem1sIHZlcnNpb249IjUuMTQiPgoKPGZhY3RvcnkgaWQ9IjEiIHV1aWQ9IjE0NTA0OTJkODU0NTQ5Mzk4YzA3M2MxOGM2NDRhYWUxIj4KCTxkZXNjcmlwdGlvbj5DaGFubmVsPC9kZXNjcmlwdGlvbj4KCTxtYW51ZmFjdHVyZXI+QXBwbGU8L21hbnVmYWN0dXJlcj4KCTx2ZXJzaW9uPjE8L3ZlcnNpb24+CjwvZmFjdG9yeT4KCgo8cGFyYW1ldGVyIG5hbWU9IiIgaWQ9IjIwIiBmbGFncz0iNDI5NTAzMjg0OCI+Cgk8ZmxhZ3M+NDI5NTAzMjg0ODwvZmxhZ3M+Cgk8bnVtYmVyT2ZLZXlwb2ludHM+MDwvbnVtYmVyT2ZLZXlwb2ludHM+Cgk8ZGVmYXVsdFZhbD4qKioqKioqKio2SWVNYi1nT0xCb0ExMUkqRTYxLSpJNC1rZE03NU5aUWJCZFBxdE43NDNtTXFWZFJhSm1KMEZvUHItTTc0eFdPYUpYUjVBRyoqNDRjM3dFMW90SEdxSnROS0YtUWFCY09MTlpRaDI2MEo2WUE2KipjRWhKNzR0cFA0azYyRmNZOEg2ckdJbERJSkEqKioqKioqKi0qRSoqKioqKioqKkEqKioqKioqKioqKioqKioqKioqKktFKio8L2RlZmF1bHRWYWw+Cgk8ZGF0YVZhbHVlPioqKioqKioqKjZJZU1iLWdPTEJvQTExSSpFNjEtKkk0LWtkTTc1TlpRYkJkUHF0Tjc0M21NcVZkUmFKbUowRm9Qci1NNzR4V09hSlhSNUFHKio0NGMzd0Uxb3RIR3FKdE5LRi1RYUJjT0xOWlFoMjYwSjZZQTYqKmNFaEo3NHRwUDRrNjJGY1k4SDZyR0lsRElKQSoqKioqKioqLSpFKioqKioqKioqQSoqKioqKioqKioqKioqKioqKioqS0UqKjwvZGF0YVZhbHVlPgo8L3BhcmFtZXRlcj4KCjwvb3ptbD4K"/>
+                                <param name="" key="23" value="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPCFET0NUWVBFIG96eG1sc2NlbmU+Cjxvem1sIHZlcnNpb249IjUuMTQiPgoKPGZhY3RvcnkgaWQ9IjEiIHV1aWQ9IjRkMGU0OGQ4NGZjYTQyNGQ4MmFhOThhMDI3YzZlYzVjIj4KCTxkZXNjcmlwdGlvbj5DaGFubmVsPC9kZXNjcmlwdGlvbj4KCTxtYW51ZmFjdHVyZXI+QXBwbGU8L21hbnVmYWN0dXJlcj4KCTx2ZXJzaW9uPjE8L3ZlcnNpb24+CjwvZmFjdG9yeT4KCgo8cGFyYW1ldGVyIG5hbWU9IiIgaWQ9IjIzIiBmbGFncz0iNDI5OTIyNzE4NCI+Cgk8ZmxhZ3M+NDI5OTIyNzE4NDwvZmxhZ3M+Cgk8bnVtYmVyT2ZLZXlwb2ludHM+MDwvbnVtYmVyT2ZLZXlwb2ludHM+Cgk8ZGVmYXVsdFZhbD4qKioqKioqKipSMmVNYi1nT0xCb0ExMUkqRTYxLSpJNC1rZE03NU5aUWJCZFBxdE43NDNtTXFWZFJhSm1KMEZvUHItTTc0eFdPYUpYUjVBRyoqNDRjM3dFMW90SEdxSnROS0YtUWFCY09MTlpRaDI2MEo2WUE2Ki1ja2dBNUpJWVBiSmdQQnNCMVV3RTJGNkgzLUlLM2xVTjRWZ1A0bGdQNGxrUDRsZ1A0bGdQSzRCalBiRm1NTEJvTExCY01LRmpSckJMTUw3aFI0Vk9NYWxWTXFoRVBxWmlSM05yTUw3aFI0VklSNFppUjNsaE9LRm9QcXRaUXBGZFBiRks3NEJnTUxCbktyQmNNS0ZqUnJCSU9LdG9LYVZkTnFWZ09LUmNSNUJPUXEzb1JMN1ZSNFpqUFpkV1FhWmJPNUZpTkxCbks0SnNRNHhuUkw3WkxhcGRONUZqUGFKbkpxM21QTEZjSnJCY01LRmpSckFXR2xXS1U2KjBvVnNUNjAzTzc0QmdNTEJuUGEzaE5KVVlNcWxWUXJCWlFwd0U0My0tRklWMklZQmpQNHhtRXF4bVFhSlhSM05WUDVKWlF1Nlc2cHdFNDMtLUZJVjJJWUJqUDR4bUVxeG1RYUpYUjNOVlA1SlpRcFZDSW94V09hSlhSKio2Ki0yKjRVKlkqMFkqQVUqcioyWSpIKi1EKjMyKkpFLVAqNVUqVUUwRCo3YypjRTBhKjlBKmlVMTQqQjIqcioxYipEKip6azI1KkVrLTFVMkgqRnMtN2szMCpJSS1NKioqKioqKioqNi0qKioqKioqKiowRSoqKioqKioqKioqKioqKioqKiozZDwvZGVmYXVsdFZhbD4KCTxkYXRhVmFsdWU+KioqKioqKioqV0llTWItZ09MQm9BMTFJKkU2MS0qSTQta2RNNzVOWlFiQmRQcXRONzQzbU1xVmRSYUptSjBGb1ByLU03NHhXT2FKWFI1QUcqKjQ0YzN3RTFvdEhHcUp0TktGLVFhQmNPTE5aUWgyNjBKNllBNiotY2tnQThKSVlQYkpnUEJzQjFVd0UyRjZIMy1JSzNsVU40VmdRNUZzVDYwMlc2bUVaN1dRY0s0QmpQYkZtTUxCb0xMQmNNS0ZqUnJCTE1MN2hSNFZPTWFsVk1xaEVQcVppUjNOck1MN2hSNFZJUjRaaVIzbGhPS0ZvUHF0WlFwRmRQYkZLNzRCZ01MQm5LckJjTUtGalJyQklPS3RvS2FWZE5xVmdPS1JjUjVCT1FxM29STDdWUjRaalBaZFdRYVpiTzVGaU5MQm5LNEpzUTR4blJMN1pMYXBkTjVGalBhSm5KcTNtUExGY0pyQmNNS0ZqUnJBVyoqKioqMDkqYjVnaTZnKlRiZGtXRHhldmgwOSpjSlpUNlktU0VxaSoqVzh6b0p3cjZmeFRFM1VXRUxVWlRHNnpRNmlrNmZ2aGtpd1drQWNzUkc3Kk04QmdvV2NmOTBwTzc0QmdNTEJuUGEzaE5KVVlNcWxWUXJCWlFwd0U0My0tRklWMklZQmpQNHhtRXF4bVFhSlhSM05WUDVKWlF1Nmk5cHdFNDMtLUZJVjJJWUJqUDR4bUVxeG1RYUpYUjNOVlA1SlpRcFZDSW94V09hSlhSKio2Ki0yKjRVKlkqMFkqQVUqcioyWSpIKi1EKjMyKkpFLVAqNVUqVUUwRCo3YypjRTBhKjlBKmlVMTQqQjIqcioxYipEKip6azI1KkVrLTJFMksqRmctNioyWipHUS05KjJsKkhNLUNrMyoqSUktR1UzRCpKYy1NazN5Kk0yLWIqKioqKioqKio2LSoqKioqKioqKjEqKioqKioqKioqKioqKioqKioqKjRaPC9kYXRhVmFsdWU+CjwvcGFyYW1ldGVyPgoKPC9vem1sPgo="/>
+                                <param name="trigger Enhance" key="18" value="6"/>
+                                <param name="Exposure" key="3" value="-0.464378"/>
+                                <param name="Contrast" key="17" value="0"/>
+                                <param name="Brightness" key="2" value="0.939631"/>
+                                <param name="Highlights" key="7" value="-0.872076"/>
+                                <param name="Black Point" key="1" value="-2.49406"/>
+                                <param name="Shadows" key="4" value="3.50997"/>
+                                <param name="Saturation" key="16" value="15.5092"/>
+                                <param name="Highlights Warmth" key="10" value="1.70885"/>
+                                <param name="Highlights Tint" key="11" value="-5.04216"/>
+                                <param name="Midtones Warmth" key="12" value="-6.31939"/>
+                                <param name="Midtones Tint" key="13" value="3.47286"/>
+                                <param name="Shadows Warmth" key="14" value="-4.89004"/>
+                                <param name="Shadows Tint" key="15" value="-1.63572"/>
+                            </filter-video>
+                        </asset-clip>
+                        <asset-clip ref="r9" offset="159828669/30000s" name="DJI_20260424194117_0101_D" start="2017625610/30000s" duration="57022966/30000s" format="r5" tcFormat="DF" audioRole="dialogue">
+                            <filter-video ref="r6" name="Color Adjustments">
+                                <data key="effectConfig">YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05TS2V5ZWRBcmNoaXZlctEICVRyb290gAGlCwwVFhdVJG51bGzTDQ4PEBIUV05TLmtleXNaTlMub2JqZWN0c1YkY2xhc3OhEYACoROAA4AEXXBsdWdpblZlcnNpb24QAtIYGRobWiRjbGFzc25hbWVYJGNsYXNzZXNfEBNOU011dGFibGVEaWN0aW9uYXJ5oxocHVxOU0RpY3Rpb25hcnlYTlNPYmplY3QIERokKTI3SUxRU1lfZm55gIKEhoiKmJqfqrPJzdoAAAAAAAABAQAAAAAAAAAeAAAAAAAAAAAAAAAAAAAA4w==</data>
+                                <param name="Control Range" key="19" value="0 (SDR)"/>
+                                <param name="" key="20" value="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPCFET0NUWVBFIG96eG1sc2NlbmU+Cjxvem1sIHZlcnNpb249IjUuMTQiPgoKPGZhY3RvcnkgaWQ9IjEiIHV1aWQ9IjE0NTA0OTJkODU0NTQ5Mzk4YzA3M2MxOGM2NDRhYWUxIj4KCTxkZXNjcmlwdGlvbj5DaGFubmVsPC9kZXNjcmlwdGlvbj4KCTxtYW51ZmFjdHVyZXI+QXBwbGU8L21hbnVmYWN0dXJlcj4KCTx2ZXJzaW9uPjE8L3ZlcnNpb24+CjwvZmFjdG9yeT4KCgo8cGFyYW1ldGVyIG5hbWU9IiIgaWQ9IjIwIiBmbGFncz0iNDI5NTAzMjg0OCI+Cgk8ZmxhZ3M+NDI5NTAzMjg0ODwvZmxhZ3M+Cgk8bnVtYmVyT2ZLZXlwb2ludHM+MDwvbnVtYmVyT2ZLZXlwb2ludHM+Cgk8ZGVmYXVsdFZhbD4qKioqKioqKio2SWVNYi1nT0xCb0ExMUkqRTYxLSpJNC1rZE03NU5aUWJCZFBxdE43NDNtTXFWZFJhSm1KMEZvUHItTTc0eFdPYUpYUjVBRyoqNDRjM3dFMW90SEdxSnROS0YtUWFCY09MTlpRaDI2MEo2WUE2KipjRWhKNzR0cFA0azYyRmNZOEg2ckdJbERJSkEqKioqKioqKi0qRSoqKioqKioqKkEqKioqKioqKioqKioqKioqKioqKktFKio8L2RlZmF1bHRWYWw+Cgk8ZGF0YVZhbHVlPioqKioqKioqKjZJZU1iLWdPTEJvQTExSSpFNjEtKkk0LWtkTTc1TlpRYkJkUHF0Tjc0M21NcVZkUmFKbUowRm9Qci1NNzR4V09hSlhSNUFHKio0NGMzd0Uxb3RIR3FKdE5LRi1RYUJjT0xOWlFoMjYwSjZZQTYqKmNFaEo3NHRwUDRrNjJGY1k4SDZyR0lsRElKQSoqKioqKioqLSpFKioqKioqKioqQSoqKioqKioqKioqKioqKioqKioqS0UqKjwvZGF0YVZhbHVlPgo8L3BhcmFtZXRlcj4KCjwvb3ptbD4K"/>
+                                <param name="" key="23" value="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPCFET0NUWVBFIG96eG1sc2NlbmU+Cjxvem1sIHZlcnNpb249IjUuMTQiPgoKPGZhY3RvcnkgaWQ9IjEiIHV1aWQ9IjRkMGU0OGQ4NGZjYTQyNGQ4MmFhOThhMDI3YzZlYzVjIj4KCTxkZXNjcmlwdGlvbj5DaGFubmVsPC9kZXNjcmlwdGlvbj4KCTxtYW51ZmFjdHVyZXI+QXBwbGU8L21hbnVmYWN0dXJlcj4KCTx2ZXJzaW9uPjE8L3ZlcnNpb24+CjwvZmFjdG9yeT4KCgo8cGFyYW1ldGVyIG5hbWU9IiIgaWQ9IjIzIiBmbGFncz0iNDI5OTIyNzE4NCI+Cgk8ZmxhZ3M+NDI5OTIyNzE4NDwvZmxhZ3M+Cgk8bnVtYmVyT2ZLZXlwb2ludHM+MDwvbnVtYmVyT2ZLZXlwb2ludHM+Cgk8ZGVmYXVsdFZhbD4qKioqKioqKipSMmVNYi1nT0xCb0ExMUkqRTYxLSpJNC1rZE03NU5aUWJCZFBxdE43NDNtTXFWZFJhSm1KMEZvUHItTTc0eFdPYUpYUjVBRyoqNDRjM3dFMW90SEdxSnROS0YtUWFCY09MTlpRaDI2MEo2WUE2Ki1ja2dBNUpJWVBiSmdQQnNCMVV3RTJGNkgzLUlLM2xVTjRWZ1A0bGdQNGxrUDRsZ1A0bGdQSzRCalBiRm1NTEJvTExCY01LRmpSckJMTUw3aFI0Vk9NYWxWTXFoRVBxWmlSM05yTUw3aFI0VklSNFppUjNsaE9LRm9QcXRaUXBGZFBiRks3NEJnTUxCbktyQmNNS0ZqUnJCSU9LdG9LYVZkTnFWZ09LUmNSNUJPUXEzb1JMN1ZSNFpqUFpkV1FhWmJPNUZpTkxCbks0SnNRNHhuUkw3WkxhcGRONUZqUGFKbkpxM21QTEZjSnJCY01LRmpSckFXR2xXS1U2KjBvVnNUNjAzTzc0QmdNTEJuUGEzaE5KVVlNcWxWUXJCWlFwd0U0My0tRklWMklZQmpQNHhtRXF4bVFhSlhSM05WUDVKWlF1Nlc2cHdFNDMtLUZJVjJJWUJqUDR4bUVxeG1RYUpYUjNOVlA1SlpRcFZDSW94V09hSlhSKio2Ki0yKjRVKlkqMFkqQVUqcioyWSpIKi1EKjMyKkpFLVAqNVUqVUUwRCo3YypjRTBhKjlBKmlVMTQqQjIqcioxYipEKip6azI1KkVrLTFVMkgqRnMtN2szMCpJSS1NKioqKioqKioqNi0qKioqKioqKiowRSoqKioqKioqKioqKioqKioqKiozZDwvZGVmYXVsdFZhbD4KCTxkYXRhVmFsdWU+KioqKioqKioqV0llTWItZ09MQm9BMTFJKkU2MS0qSTQta2RNNzVOWlFiQmRQcXRONzQzbU1xVmRSYUptSjBGb1ByLU03NHhXT2FKWFI1QUcqKjQ0YzN3RTFvdEhHcUp0TktGLVFhQmNPTE5aUWgyNjBKNllBNiotY2tnQThKSVlQYkpnUEJzQjFVd0UyRjZIMy1JSzNsVU40VmdRNUZzVDYwMlc2bUVaN1dRY0s0QmpQYkZtTUxCb0xMQmNNS0ZqUnJCTE1MN2hSNFZPTWFsVk1xaEVQcVppUjNOck1MN2hSNFZJUjRaaVIzbGhPS0ZvUHF0WlFwRmRQYkZLNzRCZ01MQm5LckJjTUtGalJyQklPS3RvS2FWZE5xVmdPS1JjUjVCT1FxM29STDdWUjRaalBaZFdRYVpiTzVGaU5MQm5LNEpzUTR4blJMN1pMYXBkTjVGalBhSm5KcTNtUExGY0pyQmNNS0ZqUnJBVyoqKioqMDkqUEVjNjZnLS10cUFXa0VVejRXOSpxSkFvNmcqNEhoMCoqVzktNipXdTZYdVROWSpXRHQqemowNnpieG8qNmcwRFpMd1drR0t2VEc4enAqU2tvV2NmOTBwTzc0QmdNTEJuUGEzaE5KVVlNcWxWUXJCWlFwd0U0My0tRklWMklZQmpQNHhtRXF4bVFhSlhSM05WUDVKWlF1Nmk5cHdFNDMtLUZJVjJJWUJqUDR4bUVxeG1RYUpYUjNOVlA1SlpRcFZDSW94V09hSlhSKio2Ki0yKjRVKlkqMFkqQVUqcioyWSpIKi1EKjMyKkpFLVAqNVUqVUUwRCo3YypjRTBhKjlBKmlVMTQqQjIqcioxYipEKip6azI1KkVrLTJFMksqRmctNioyWipHUS05KjJsKkhNLUNrMyoqSUktR1UzRCpKYy1NazN5Kk0yLWIqKioqKioqKio2LSoqKioqKioqKjEqKioqKioqKioqKioqKioqKioqKjRaPC9kYXRhVmFsdWU+CjwvcGFyYW1ldGVyPgoKPC9vem1sPgo="/>
+                                <param name="trigger Enhance" key="18" value="6"/>
+                                <param name="Exposure" key="3" value="-4.487"/>
+                                <param name="Contrast" key="17" value="0"/>
+                                <param name="Brightness" key="2" value="1.24893"/>
+                                <param name="Highlights" key="7" value="0.311327"/>
+                                <param name="Black Point" key="1" value="-3.02975"/>
+                                <param name="Shadows" key="4" value="-1.65648"/>
+                                <param name="Saturation" key="16" value="1.12695"/>
+                                <param name="Highlights Warmth" key="10" value="-8.51541"/>
+                                <param name="Highlights Tint" key="11" value="-6.79141"/>
+                                <param name="Midtones Warmth" key="12" value="-10.3583"/>
+                                <param name="Midtones Tint" key="13" value="-2.09856"/>
+                                <param name="Shadows Warmth" key="14" value="-3.70374"/>
+                                <param name="Shadows Tint" key="15" value="-10.0021"/>
+                            </filter-video>
+                        </asset-clip>
+                        <transition name="Fade To Color" offset="216821605/30000s" duration="30030/30000s">
+                            <filter-video ref="r2" name="Fade To Color">
+                                <data key="effectConfig">YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05TS2V5ZWRBcmNoaXZlctEICVRyb290gAGlCwwVFhdVJG51bGzTDQ4PEBIUV05TLmtleXNaTlMub2JqZWN0c1YkY2xhc3OhEYACoROAA4AEXXBsdWdpblZlcnNpb24QAtIYGRobWiRjbGFzc25hbWVYJGNsYXNzZXNfEBNOU011dGFibGVEaWN0aW9uYXJ5oxocHVxOU0RpY3Rpb25hcnlYTlNPYmplY3QIERokKTI3SUxRU1lfZm55gIKEhoiKmJqfqrPJzdoAAAAAAAABAQAAAAAAAAAeAAAAAAAAAAAAAAAAAAAA4w==</data>
+                                <param name="Midpoint" key="1" value="50"/>
+                                <param name="Hold" key="2" value="25"/>
+                            </filter-video>
+                            <filter-audio ref="r3" name="Audio Crossfade"/>
+                        </transition>
+                    </spine>
+                </sequence>
+            </project>
+        </event>
+        <smart-collection name="Projects" match="all">
+            <match-clip rule="is" type="project"/>
+        </smart-collection>
+        <smart-collection name="All Video" match="any">
+            <match-media rule="is" type="videoOnly"/>
+            <match-media rule="is" type="videoWithAudio"/>
+        </smart-collection>
+        <smart-collection name="Audio Only" match="all">
+            <match-media rule="is" type="audioOnly"/>
+        </smart-collection>
+        <smart-collection name="Stills" match="all">
+            <match-media rule="is" type="stills"/>
+        </smart-collection>
+        <smart-collection name="Favorites" match="all">
+            <match-ratings value="favorites"/>
+        </smart-collection>
+        <smart-collection name="Missing Analysis" match="all">
+            <match-analysis-type rule="isMissing" value="any"/>
+        </smart-collection>
+    </library>
+</fcpxml>
