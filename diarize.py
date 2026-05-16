@@ -414,6 +414,72 @@ def transcribe_speaker_samples(segments):
     return results
 
 
+def transcribe_full(keep_speakers, segments):
+    """Concatenate all audio for kept speakers and run a full Whisper transcription."""
+    print("\nTranscribing full audio for kept speaker(s)...")
+    if WHISPER_BACKEND == "mlx":
+        import mlx_whisper
+    else:
+        import whisper
+        print("  Loading Whisper model (base)...")
+        model = whisper.load_model("base")
+
+    lines = []
+    for sp in sorted(keep_speakers):
+        sp_segs = [s for s in segments if s["speaker"] == sp and s["end"] - s["start"] >= 0.5]
+        if not sp_segs:
+            continue
+
+        print(f"  Transcribing {sp} ({len(sp_segs)} segments, "
+              f"{sum(s['end']-s['start'] for s in sp_segs)/60:.1f} min)...", flush=True)
+
+        with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tf:
+            tmp_path = tf.name
+
+        try:
+            part_files = []
+            for i, seg in enumerate(sp_segs):
+                pf = tmp_path + f"_part{i}.wav"
+                subprocess.run([
+                    "ffmpeg", "-y", "-i", str(AUDIO_PATH),
+                    "-ss", str(seg["start"]),
+                    "-t", str(seg["end"] - seg["start"]),
+                    "-ac", "1", "-ar", "16000", pf
+                ], capture_output=True, check=True)
+                part_files.append(pf)
+
+            if len(part_files) == 1:
+                os.rename(part_files[0], tmp_path)
+            else:
+                list_file = tmp_path + "_list.txt"
+                with open(list_file, "w") as lf:
+                    for pf in part_files:
+                        lf.write(f"file '{pf}'\n")
+                subprocess.run([
+                    "ffmpeg", "-y", "-f", "concat", "-safe", "0",
+                    "-i", list_file, "-c", "copy", tmp_path
+                ], capture_output=True, check=True)
+                os.unlink(list_file)
+                for pf in part_files:
+                    if os.path.exists(pf):
+                        os.unlink(pf)
+
+            if WHISPER_BACKEND == "mlx":
+                result = mlx_whisper.transcribe(tmp_path, path_or_hf_repo="mlx-community/whisper-base-mlx")
+            else:
+                result = model.transcribe(tmp_path, task="transcribe")
+
+            lang_code = result.get("language", "?")
+            lang_name = LANGUAGE_NAMES.get(lang_code, lang_code.upper())
+            lines.append(f"[{sp} — {lang_name}]\n\n{result['text'].strip()}")
+            print(f"  Done [{lang_name}]")
+        finally:
+            if os.path.exists(tmp_path):
+                os.unlink(tmp_path)
+
+    return "\n\n".join(lines)
+
+
 def show_speaker_summary(segments, duration, transcripts=None):
     speakers = {}
     for seg in segments:
@@ -745,6 +811,12 @@ def main():
             segments, remove_speakers, video_info, output_path, original_path=ORIGINAL_PATH
         )
 
+    transcript_text = transcribe_full(keep_speakers, segments)
+    transcript_path = output_path.with_suffix(".txt")
+    with open(transcript_path, "w", encoding="utf-8") as f:
+        f.write(f"{VIDEO_PATH.stem}\n{'=' * len(VIDEO_PATH.stem)}\n\n")
+        f.write(transcript_text + "\n")
+
     print(f"\n=== Done ===")
     print(f"  Kept {len(keep)} clip(s)  ({total_dur / 60:.1f} min)")
     for sp in sorted(remove_speakers):
@@ -753,6 +825,7 @@ def main():
         used = {c["asset_id"] for c in keep}
         print(f"  Source files referenced: {len(used)}")
     print(f"\n  Output: {output_path.name}")
+    print(f"  Transcript: {transcript_path.name}")
 
     answer = input("\nOpen in Final Cut Pro now? [y/N]: ").strip().lower()
     if answer in ("y", "yes"):
