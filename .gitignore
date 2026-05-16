@@ -1,6 +1,9 @@
 # Credentials
 .env
 
+# Claude Code instructions
+CLAUDE.md
+
 # All script-generated files live in output/ subdirectories
 **/output/
 

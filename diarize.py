@@ -6,7 +6,7 @@ Runs pyannote diarization on a video, transcribes a sample from each speaker
 and outputs a Final Cut Pro-ready .fcpxml.
 
 Usage:
-  python3 diarize.py <proxy_video> [--speakers N] [--fcpxml <original_project.fcpxml>]
+  python3 diarize.py <proxy_video> [--speakers N] [--fcpxml <original_project.fcpxml>] [--whisper openai|mlx]
 
 Options:
   --speakers N            Tell pyannote the exact number of speakers (improves accuracy).
@@ -17,6 +17,8 @@ Options:
                           If it matches an existing event in your library, FCP will add
                           the project there instead of creating a new event.
                           Defaults to "Speaker Cut".
+  --whisper openai|mlx    Transcription backend. "openai" (default) uses openai-whisper;
+                          "mlx" uses mlx-whisper (Apple Silicon, faster on ANE).
 """
 
 import sys
@@ -101,6 +103,19 @@ if "--event" in args:
         EVENT_NAME = args[idx + 1]
     except IndexError:
         print("Error: --event requires a name argument")
+        sys.exit(1)
+
+WHISPER_BACKEND = "openai"
+if "--whisper" in args:
+    idx = args.index("--whisper")
+    try:
+        val = args[idx + 1]
+        if val not in ("openai", "mlx"):
+            print("Error: --whisper must be 'openai' or 'mlx'")
+            sys.exit(1)
+        WHISPER_BACKEND = val
+    except IndexError:
+        print("Error: --whisper requires a backend argument ('openai' or 'mlx')")
         sys.exit(1)
 
 HF_TOKEN = os.environ.get("HF_TOKEN", "")
@@ -361,11 +376,13 @@ def load_cached_segments():
 
 def transcribe_speaker_samples(segments):
     """Transcribe a short sample from each speaker using Whisper."""
-    import whisper
-
     print("\nTranscribing speaker samples for identification...")
-    print("  Loading Whisper model (base)...")
-    model = whisper.load_model("base")
+    if WHISPER_BACKEND == "mlx":
+        import mlx_whisper
+    else:
+        import whisper
+        print("  Loading Whisper model (base)...")
+        model = whisper.load_model("base")
 
     # For each speaker, collect segments until we have ~25s of audio
     speaker_segs = {}
@@ -424,7 +441,10 @@ def transcribe_speaker_samples(segments):
                     if os.path.exists(pf):
                         os.unlink(pf)
 
-            result = model.transcribe(tmp_path, task="transcribe")
+            if WHISPER_BACKEND == "mlx":
+                result = mlx_whisper.transcribe(tmp_path, path_or_hf_repo="mlx-community/whisper-base-mlx")
+            else:
+                result = model.transcribe(tmp_path, task="transcribe")
             lang_code = result.get("language", "?")
             lang_name = LANGUAGE_NAMES.get(lang_code, lang_code.upper())
             text = result["text"].strip()
