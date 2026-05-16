@@ -128,7 +128,6 @@ if not HF_TOKEN:
 PROJECT_DIR = VIDEO_PATH.parent
 OUTPUT_DIR = PROJECT_DIR / "output"
 AUDIO_PATH = OUTPUT_DIR / f"{VIDEO_PATH.stem}_audio_mono.wav"
-SEGMENTS_PATH = OUTPUT_DIR / f"{VIDEO_PATH.stem}_segments.json"
 
 LANGUAGE_NAMES = {
     "en": "English", "es": "Spanish", "fr": "French", "de": "German",
@@ -325,53 +324,8 @@ def run_diarization():
     for turn, _, speaker in diarization.itertracks(yield_label=True):
         segments.append({"start": round(turn.start, 3), "end": round(turn.end, 3), "speaker": speaker})
 
-    # Use save_segments so that the FCPXML path (from the CLI flag) is persisted
-    # even on the initial diarization write.
-    save_segments(segments, {}, fcpxml_path=FCPXML_PATH)
-    print(f"  Saved {len(segments)} segments → {SEGMENTS_PATH.name}")
-    return segments, {}
-
-
-def save_segments(segments, speaker_info, fcpxml_path=None):
-    """Write segments + per-speaker language metadata + FCPXML path to the JSON cache.
-
-    The fcpxml_path argument controls what gets stored:
-      - A Path/str value  → store that absolute path (CLI flag or newly resolved path).
-      - None              → preserve whatever path is already in the cache, if any.
-    This ensures that re-runs which don't supply --fcpxml never silently erase a
-    previously cached path.
-    """
-    # Preserve an existing cached path when the caller has nothing new to write.
-    stored_path = str(fcpxml_path) if fcpxml_path else None
-    if stored_path is None and SEGMENTS_PATH.exists():
-        try:
-            with open(SEGMENTS_PATH) as _f:
-                _existing = json.load(_f)
-            stored_path = _existing.get("fcpxml_path")
-        except Exception:
-            pass
-
-    data = {
-        "speakers": speaker_info,
-        "segments": segments,
-        "fcpxml_path": stored_path,
-    }
-    with open(SEGMENTS_PATH, "w") as f:
-        json.dump(data, f, indent=2)
-
-
-def load_cached_segments():
-    if not SEGMENTS_PATH.exists():
-        return None, None, None
-    answer = input(f"\nFound cached diarization ({SEGMENTS_PATH.name}). Use it? [Y/n]: ").strip().lower()
-    if answer not in ("", "y", "yes"):
-        return None, None, None
-    with open(SEGMENTS_PATH) as f:
-        data = json.load(f)
-    if isinstance(data, list):
-        return data, {}, None
-    cached_fcpxml = data.get("fcpxml_path")
-    return data.get("segments", []), data.get("speakers", {}), cached_fcpxml
+    print(f"  Found {len(segments)} segments")
+    return segments
 
 
 def transcribe_speaker_samples(segments):
@@ -729,31 +683,8 @@ def main():
     else:
         print(f"Audio already extracted ({AUDIO_PATH.name}), skipping.")
 
-    segments, cached_speakers, cached_fcpxml_path = load_cached_segments()
-    if segments is None:
-        segments, cached_speakers = run_diarization()
-        # run_diarization already called save_segments with FCPXML_PATH; mirror it here
-        # so the rest of main() can use cached_fcpxml_path normally.
-        cached_fcpxml_path = str(FCPXML_PATH) if FCPXML_PATH else None
-
-    # Resolve FCPXML path: CLI flag > cached path from previous run
+    segments = run_diarization()
     resolved_fcpxml_path = FCPXML_PATH
-    if resolved_fcpxml_path is None and cached_fcpxml_path:
-        resolved_fcpxml_path = Path(cached_fcpxml_path)
-        # Relative paths in the cache are resolved relative to the script dir
-        if not resolved_fcpxml_path.is_absolute():
-            resolved_fcpxml_path = (Path(__file__).parent / resolved_fcpxml_path).resolve()
-        if resolved_fcpxml_path.exists():
-            print(f"Using cached FCPXML: {resolved_fcpxml_path.name}")
-        else:
-            print(
-                f"Warning: cached FCPXML not found at:\n"
-                f"  {resolved_fcpxml_path}\n"
-                f"The drive may be unplugged or the file moved. Re-specify it with:\n"
-                f"  python3 diarize.py \"{VIDEO_PATH}\" --fcpxml <path/to/project.fcpxmld>\n"
-                f"Falling back to proxy-only mode."
-            )
-            resolved_fcpxml_path = None
 
     # Parse FCPXML — its sequence duration is authoritative
     parsed_fcpxml = None
@@ -774,13 +705,6 @@ def main():
     print(f"Duration: ~{int(duration) // 60}m {int(duration) % 60}s\n")
 
     transcripts = transcribe_speaker_samples(segments)
-
-    # Persist language info back to the JSON cache
-    speaker_info = {
-        sp: {"language": t["language"], "lang_code": t.get("lang_code", "?")}
-        for sp, t in transcripts.items()
-    }
-    save_segments(segments, speaker_info, fcpxml_path=resolved_fcpxml_path)
 
     speakers = show_speaker_summary(segments, duration, transcripts)
     # Sort by duration descending — same order shown in the summary above
