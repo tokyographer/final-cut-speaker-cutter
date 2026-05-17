@@ -503,6 +503,15 @@ def show_speaker_summary(segments, duration, transcripts=None):
     return speakers
 
 
+def _drop_short_clips(clips, dur_key="duration", threshold=1.0):
+    before = len(clips)
+    result = [c for c in clips if c[dur_key] > threshold]
+    dropped = before - len(result)
+    if dropped:
+        print(f"  Dropped {dropped} clip(s) ≤{threshold:.0f}s from spine.")
+    return result
+
+
 def snap_to_frame(t, fps_num, fps_den):
     """Round t (seconds) to the nearest frame boundary."""
     frame_index = round(t * fps_num / fps_den)
@@ -542,9 +551,10 @@ def generate_fcpxml(segments, remove_speakers, video_info, output_path, original
         s = snap_to_frame(r["start"], fps_num, fps_den)
         e = snap_to_frame(r["end"], fps_num, fps_den)
         if e - s > 0:
-            snapped_keep.append({"start": s, "end": e})
+            snapped_keep.append({"start": s, "end": e, "duration": e - s})
+    snapped_keep = _drop_short_clips(snapped_keep)
 
-    total_dur = sum(r["end"] - r["start"] for r in snapped_keep)
+    total_dur = sum(r["duration"] for r in snapped_keep)
     snapped_duration = snap_to_frame(duration, fps_num, fps_den)
     ref_path = original_path if original_path else VIDEO_PATH
     video_name = ref_path.stem
@@ -556,7 +566,7 @@ def generate_fcpxml(segments, remove_speakers, video_info, output_path, original
     clips = ""
     offset = 0.0
     for r in snapped_keep:
-        seg_dur = r["end"] - r["start"]
+        seg_dur = r["duration"]
         clips += (
             f'\n            <asset-clip name="{video_name}" ref="r2"'
             f' offset="{secs(offset, fps_num, fps_den)}"'
@@ -664,6 +674,7 @@ def generate_fcpxml_from_source(segments, remove_speakers, parsed_fcpxml, output
                     "tc_format": clip["tc_format"],
                 })
 
+    source_clips = _drop_short_clips(source_clips)
     total_dur = sum(c["duration"] for c in source_clips)
 
     # Collect the format IDs we need: sequence format + all formats used by assets
